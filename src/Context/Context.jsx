@@ -11,6 +11,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import axios from "axios";
+
 export const AuthContext = createContext(null);
 // eslint-disable-next-line react/prop-types
 const Context = ({ children }) => {
@@ -23,7 +24,18 @@ const Context = ({ children }) => {
     return signInWithPopup(auth, Provider)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        const userData = {
+          email: user.email,
+          name: user.displayName,
+          photoURL: user.photoURL,
+          role: "student",
+        };
+
+        // Return the axios Promise
+        return axios
+          .post("http://localhost:5000/users", userData)
+          .then((res) => console.log("Server Response:", res))
+          .catch((error) => console.error("Axios Error:", error));
       })
       .catch((error) => {
         console.log(error);
@@ -41,8 +53,13 @@ const Context = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logout = () => {
-    return signOut(auth);
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      console.log("User signed out successfully");
+    } catch (error) {
+      console.error("Error signing out:", error.message);
+    }
   };
 
   const reset = (email) => {
@@ -60,24 +77,6 @@ const Context = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
 
-      if (currentUser?.email) {
-        const user = { email: currentUser.email };
-        axios
-          .post("https://volunteer-blue.vercel.app/jwt", user, {
-            withCredentials: true,
-          })
-          .then((res) => {
-            console.log(res.data);
-          });
-      } else {
-        axios
-          .post("https://volunteer-blue.vercel.app/logout", {
-            withCredentials: true,
-          })
-          .then((res) => {
-            console.log(res.data);
-          });
-      }
       setLoading(false);
       console.log(currentUser);
     });

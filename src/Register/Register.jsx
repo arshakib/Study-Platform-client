@@ -3,19 +3,24 @@ import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../Context/Context";
+import axios from "axios";
 
 const Register = () => {
   const { Reg, google } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
-  const handelLogin = (event) => {
+  const handelLogin = async (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
-    const photoURL = form.photo.value;
+    const image = form.image.files[0];
+    const formData = new FormData();
+    formData.append("image", image);
     const email = form.email.value;
+    const role = form.role.value;
     const password = form.password.value;
+
     if (password.length < 6) {
       toast.error("Password must be at least 6 characters", {
         position: "top-right",
@@ -45,30 +50,31 @@ const Register = () => {
       return;
     }
 
-    // fetch("https://server-ochre-xi.vercel.app/users", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name,
-    //     email,
-    //     password,
-    //     photoURL,
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+    const { data } = await axios.post(
+      `https://api.imgbb.com/1/upload?key=90e8400173b8e420a6134c2a5baa3d33`,
+      formData
+    );
+    const user = {
+      name,
+      photoURL: data.data.url,
+      email,
+      role,
+      password,
+    };
 
-    Reg(email, password, name, photoURL)
+    console.log(user);
+
+    Reg(user.email, user.password, user.name, user.photoURL)
       // eslint-disable-next-line no-unused-vars
       .then((result) => {
         navigate("/");
+        try {
+          axios.post("http://localhost:5000/users", user).then((response) => {
+            console.log(response);
+          });
+        } catch (error) {
+          console.log(error);
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -137,17 +143,29 @@ const Register = () => {
               htmlFor="photo"
               className="block text-gray-700 font-medium mb-2"
             >
-              Photo URL
+              Upload Photo
             </label>
-            <input
-              name="photo"
-              type="url"
-              id="photo"
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your photo URL"
-              required
-            />
+            <div className="form-control">
+              <input type="file" name="image" required />
+            </div>
           </div>
+
+          <label className="form-control w-full max-w-xs">
+            <label
+              htmlFor="role"
+              className="block text-gray-700 font-medium mb-2"
+            >
+              Select your Role
+            </label>
+            <select name="role" className="select select-bordered">
+              <option disabled selected>
+                Pick one
+              </option>
+              <option>student</option>
+              <option>tutor</option>
+              <option>admin</option>
+            </select>
+          </label>
 
           {/* Password Field */}
           <div>
