@@ -31,7 +31,6 @@ const Context = ({ children }) => {
           role: "student",
         };
 
-        // Return the axios Promise
         return axios
           .post("http://localhost:5000/users", userData)
           .then((res) => console.log("Server Response:", res))
