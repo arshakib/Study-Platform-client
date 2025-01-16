@@ -43,7 +43,7 @@ export default function DefaultSidebar() {
             className={({ isActive }) =>
               isActive ? "text-blue-900 font-semibold underline" : ""
             }
-            to="/dashboard/tutorsession"
+            to="/dashboard/viewallsession"
           >
             View all study session
           </NavLink>
@@ -56,7 +56,7 @@ export default function DefaultSidebar() {
             className={({ isActive }) =>
               isActive ? "text-blue-900 font-semibold underline" : ""
             }
-            to="/dashboard/materials"
+            to="/dashboard/viewallmaterials"
           >
             View all materials
           </NavLink>

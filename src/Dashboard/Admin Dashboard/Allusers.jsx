@@ -26,7 +26,7 @@ const Allusers = () => {
         const { data } = await axios.get(
           `http://localhost:5000/users?search=${search}`
         );
-        setApiData(data || []); // Default to an empty array to avoid undefined
+        setApiData(data || []);
       } catch (error) {
         console.error(error);
       }
@@ -35,7 +35,7 @@ const Allusers = () => {
     if (search) {
       fetchSearchResults();
     } else {
-      setApiData(userData); // Reset to full user data if search is empty
+      setApiData(userData);
     }
   }, [search, userData]);
 

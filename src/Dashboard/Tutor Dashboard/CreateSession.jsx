@@ -22,7 +22,7 @@ const CreateSession = () => {
     const classEndDate = form.classEndDate.value;
     const duration = form.duration.value;
     const description = form.description.value;
-    const registrationFee = form.registrationFee.value;
+    const registrationFee = parseInt(form.registrationFee.value);
     const status = form.status.value;
 
     // console.log(session);

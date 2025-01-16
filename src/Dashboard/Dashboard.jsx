@@ -10,7 +10,7 @@ const Dashboard = () => {
   const { user } = useContext(AuthContext);
   console.log(user?.email);
   const { data: userData = [] } = useQuery({
-    queryKey: ["session", user?.email],
+    queryKey: ["user", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
         `http://localhost:5000/users/${user?.email}`

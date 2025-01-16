@@ -15,6 +15,8 @@ import TutorSession from "./Dashboard/Tutor Dashboard/TutorSession";
 import UploadMate from "./Dashboard/Tutor Dashboard/UploadMate";
 import ViewMate from "./Dashboard/Tutor Dashboard/ViewMate";
 import Allusers from "./Dashboard/Admin Dashboard/Allusers";
+import StudySession from "./Dashboard/Admin Dashboard/StudySession";
+import AllMate from "./Dashboard/Admin Dashboard/AllMate";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +62,14 @@ const router = createBrowserRouter([
       {
         path: "allusers",
         element: <Allusers />,
+      },
+      {
+        path: "viewallsession",
+        element: <StudySession />,
+      },
+      {
+        path: "viewallmaterials",
+        element: <AllMate />,
       },
     ],
   },

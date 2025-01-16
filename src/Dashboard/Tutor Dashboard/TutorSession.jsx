@@ -70,7 +70,7 @@ const TutorSession = () => {
             </tr>
           </thead>
           <tbody>
-            {session.map((session) => (
+            {session?.map((session) => (
               // eslint-disable-next-line react/jsx-key
               <tr>
                 <th>
@@ -104,13 +104,7 @@ const TutorSession = () => {
                     </div>
                   </div>
                 </td>
-                <td>
-                  {session?.status}
-                  <br />
-                  <span className="badge badge-ghost badge-sm">
-                    {session?.region || "N/A"}
-                  </span>
-                </td>
+                <td>{session?.status}</td>
                 <td>
                   <button className=" btn  btn-xs">details</button>
                 </td>

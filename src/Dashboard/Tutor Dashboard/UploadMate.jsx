@@ -30,6 +30,7 @@ const UploadMate = () => {
     );
 
     const materialData = {
+      email: user?.email,
       sessionId: id,
       materialimage: data?.data?.url,
       link: link,

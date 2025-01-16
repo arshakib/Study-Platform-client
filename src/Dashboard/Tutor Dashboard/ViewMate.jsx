@@ -2,8 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import DeleteModal from "./DeleteModal";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/Context";
 
 const ViewMate = () => {
+  const { user } = useContext(AuthContext);
   const {
     data: material = [],
     isLoading,
@@ -11,7 +14,9 @@ const ViewMate = () => {
   } = useQuery({
     queryKey: ["material"],
     queryFn: async () => {
-      const { data } = await axios.get(`http://localhost:5000/materials`);
+      const { data } = await axios.get(
+        `http://localhost:5000/materials/${user?.email}`
+      );
       return data;
     },
   });
