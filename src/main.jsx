@@ -14,6 +14,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 import TutorSession from "./Dashboard/Tutor Dashboard/TutorSession";
 import UploadMate from "./Dashboard/Tutor Dashboard/UploadMate";
 import ViewMate from "./Dashboard/Tutor Dashboard/ViewMate";
+import Allusers from "./Dashboard/Admin Dashboard/Allusers";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "viewmaterials",
         element: <ViewMate />,
+      },
+      {
+        path: "allusers",
+        element: <Allusers />,
       },
     ],
   },
