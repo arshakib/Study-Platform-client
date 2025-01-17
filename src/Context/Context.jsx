@@ -18,7 +18,6 @@ const Context = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const Provider = new GoogleAuthProvider();
-  console.log(user);
 
   const google = () => {
     return signInWithPopup(auth, Provider)
@@ -77,7 +76,6 @@ const Context = ({ children }) => {
       setUser(currentUser);
 
       setLoading(false);
-      console.log(currentUser);
     });
 
     return () => unsubscribe();

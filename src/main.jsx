@@ -17,6 +17,10 @@ import ViewMate from "./Dashboard/Tutor Dashboard/ViewMate";
 import Allusers from "./Dashboard/Admin Dashboard/Allusers";
 import StudySession from "./Dashboard/Admin Dashboard/StudySession";
 import AllMate from "./Dashboard/Admin Dashboard/AllMate";
+import CreateNote from "./Dashboard/Student Dashboard/CreateNote";
+import ViewNote from "./Dashboard/Student Dashboard/ViewNote";
+import Show from "./Show Session Data/Show";
+import Private from "./Routes/Private";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +32,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/viewdata/:id",
+        element: (
+          <Private>
+            <Show />
+          </Private>
+        ),
       },
       {
         path: "/login",
@@ -70,6 +82,14 @@ const router = createBrowserRouter([
       {
         path: "viewallmaterials",
         element: <AllMate />,
+      },
+      {
+        path: "createnote",
+        element: <CreateNote />,
+      },
+      {
+        path: "viewnote",
+        element: <ViewNote />,
       },
     ],
   },

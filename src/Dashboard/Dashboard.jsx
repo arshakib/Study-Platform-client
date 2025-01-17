@@ -5,6 +5,7 @@ import { AuthContext } from "../Context/Context";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import AdminMenu from "./Admin Dashboard/AdminMenu";
+import StudentMenu from "./Student Dashboard/StudentMenu";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -26,7 +27,7 @@ const Dashboard = () => {
         <div className="w-[20%] h-[100vh] bg-gray-200 p-4 sticky top-0">
           {userData?.role === "admin" && <AdminMenu />}
           {userData?.role === "tutor" && <TutorMenu />}
-          {/* {userData?.role === "student" && <TutorMenu />} */}
+          {userData?.role === "student" && <StudentMenu />}
         </div>
         <div className="w-full m-7">
           <Outlet />
