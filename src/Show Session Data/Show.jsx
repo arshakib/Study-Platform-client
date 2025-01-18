@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../Context/Context";
 import { useContext } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 /* eslint-disable react/prop-types */
 const Show = () => {
@@ -29,11 +30,66 @@ const Show = () => {
     },
   });
 
+  const { data: reviews = [] } = useQuery({
+    queryKey: ["reviews", id.id],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `http://localhost:5000/reviews/${id.id}`
+      );
+      return data;
+    },
+  });
+  const calculateAverageRating = (reviews) => {
+    if (!reviews.length) return 0;
+    const totalRating = reviews.reduce(
+      (sum, review) => sum + parseFloat(review.rating),
+      0
+    );
+    return totalRating / reviews.length;
+  };
+
+  const averageRating = calculateAverageRating(reviews);
+
+  const paymentInfo = {
+    bookedsessionId: sessionData?._id,
+    studentId: user?.email,
+    studentName: user?.displayName,
+    tutorEmail: sessionData?.tutorEmail,
+  };
+
+  const freeSession = async () => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/payment",
+        paymentInfo
+      );
+      toast.success("Booking successful", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      console.log(data);
+    } catch (error) {
+      toast.error(`${error.response.data.message}`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
   const {
     title,
     description,
     tutorName,
-    rating,
     registrationStartDate,
     registrationEndDate,
     classStartDate,
@@ -42,11 +98,12 @@ const Show = () => {
     registrationFee,
   } = sessionData;
 
-  const dbDate = new Date(registrationEndDate).toDateString();
-  const today = new Date().toDateString();
+  const dbDate = new Date(registrationEndDate);
+  const today = new Date();
 
   return (
     <div className="my-10">
+      <ToastContainer />
       <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
         <h1 className="text-2xl font-bold text-gray-800 mb-4">{title}</h1>
 
@@ -55,7 +112,7 @@ const Show = () => {
             <strong>Tutor Name:</strong> {tutorName}
           </p>
           <p className="text-lg text-gray-700">
-            <strong>Average Rating:</strong> {rating} / 5
+            <strong>Average Rating:</strong> {averageRating} / 5
           </p>
         </div>
 
@@ -97,20 +154,12 @@ const Show = () => {
             {registrationFee === 0 ? "Free" : `$${registrationFee}`}
           </p>
         </div>
-
-        {/* <Link
-              to={`/payment/${id.id}`}
-              disabled={userData?.role !== "student"}
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
-            >
-              Book Now
-            </Link> */}
-
         <div>
-          {dbDate < today ? (
+          {dbDate > today ? (
             registrationFee == 0 ? (
               <Link
                 disabled={userData?.role !== "student"}
+                onClick={freeSession}
                 className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
               >
                 Book This Free Session Now
@@ -136,17 +185,17 @@ const Show = () => {
 
         <div className="mb-4 mt-4">
           <h2 className="text-xl font-semibold text-gray-800 mb-2">Reviews</h2>
-          {/* {reviews.length > 0 ? (
-          <ul className="space-y-2">
-            {reviews.map((review, index) => (
-              <li key={index} className="bg-gray-100 p-3 rounded-lg">
-                <p className="text-gray-700">{review}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-gray-600">No reviews available.</p>
-        )} */}
+          {reviews.length > 0 ? (
+            <ul className="space-y-2">
+              {reviews.map((review, index) => (
+                <li key={index} className="bg-gray-100 p-3 rounded-lg">
+                  <p className="text-gray-700">{review?.review}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-600">No reviews available.</p>
+          )}
         </div>
       </div>
     </div>

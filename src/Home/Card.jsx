@@ -12,8 +12,8 @@ const Card = ({ session }) => {
     registrationEndDate,
   } = session;
 
-  const dbDate = new Date(registrationEndDate).toDateString();
-  const today = new Date().toDateString();
+  const dbDate = new Date(registrationEndDate);
+  const today = new Date();
 
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-between">

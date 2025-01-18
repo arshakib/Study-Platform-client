@@ -35,6 +35,7 @@ const Cheackout = ({ id }) => {
     bookedsessionId: sessionData?._id,
     studentId: user?.email,
     studentName: user?.displayName,
+    tutorEmail: sessionData?.tutorEmail,
   };
 
   console.log(sessionData);

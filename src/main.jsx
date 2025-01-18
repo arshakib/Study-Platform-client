@@ -22,6 +22,9 @@ import ViewNote from "./Dashboard/Student Dashboard/ViewNote";
 import Show from "./Show Session Data/Show";
 import Private from "./Routes/Private";
 import Payment from "./Payment/Payment";
+import BookedCards from "./Dashboard/Student Dashboard/BookedCards";
+import ViewBooked from "./Dashboard/Student Dashboard/ViewBooked";
+import BookedMeta from "./Dashboard/Student Dashboard/BookedMeta";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "/payment/:id",
         element: <Payment />,
+      },
+      {
+        path: "viewbookeddata/:id",
+        element: <ViewBooked />,
       },
     ],
   },
@@ -95,6 +102,14 @@ const router = createBrowserRouter([
       {
         path: "viewnote",
         element: <ViewNote />,
+      },
+      {
+        path: "bookedsession",
+        element: <BookedCards />,
+      },
+      {
+        path: "viewbookedmeta",
+        element: <BookedMeta />,
       },
     ],
   },

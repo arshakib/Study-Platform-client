@@ -1,14 +1,19 @@
 /* eslint-disable react/jsx-key */
 import { useQuery } from "@tanstack/react-query";
-import Card from "./Card";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Context/Context";
+import BookedCard from "./BookedCard";
 
-const Cards = () => {
+const BookedCards = () => {
+  const { user } = useContext(AuthContext);
+
   const { data: number = [] } = useQuery({
-    queryKey: ["length"],
+    queryKey: ["bookednumber"],
     queryFn: async () => {
-      const { data } = await axios.get(`http://localhost:5000/sessionnumber`);
+      const { data } = await axios.get(
+        `http://localhost:5000/bookednumber/${user?.email}`
+      );
       return data;
     },
   });
@@ -29,18 +34,18 @@ const Cards = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/sessions?page=${currentPage}&size=${item}`)
+      .get(
+        `http://localhost:5000/bookedsessions/${user?.email}?page=${currentPage}&size=${item}`
+      )
       .then((res) => setSessionData(res.data));
-  }, [currentPage, item]);
+  }, [currentPage, item, user?.email]);
 
+  console.log(sessionData);
   return (
     <div>
-      <div className="bg-blue-100 text-blue-800 font-bold text-center py-4 px-6 rounded-lg shadow-md text-2xl">
-        ___On Going Session___
-      </div>
       <div className="my-10 grid grid-cols-3 gap-4 w-11/12 mx-auto">
         {sessionData.map((session) => (
-          <Card key={session._id} session={session} />
+          <BookedCard key={session._id} session={session} />
         ))}
       </div>
       <div className="flex justify-center">
@@ -61,4 +66,4 @@ const Cards = () => {
   );
 };
 
-export default Cards;
+export default BookedCards;

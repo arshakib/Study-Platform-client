@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import TutorMenu from "./Tutor Dashboard/TutorMenu";
 import { useContext } from "react";
 import { AuthContext } from "../Context/Context";
@@ -9,7 +9,7 @@ import StudentMenu from "./Student Dashboard/StudentMenu";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
-  console.log(user?.email);
+
   const { data: userData = [] } = useQuery({
     queryKey: ["user", user?.email],
     queryFn: async () => {
@@ -19,8 +19,7 @@ const Dashboard = () => {
       return data;
     },
   });
-
-  console.log(userData);
+  const location = useLocation();
   return (
     <div className="h-[100vh] w-full">
       <div className="flex gap-4  ">
@@ -30,6 +29,12 @@ const Dashboard = () => {
           {userData?.role === "student" && <StudentMenu />}
         </div>
         <div className="w-full m-7">
+          {location.pathname === "/dashboard" && (
+            <h1 className="text-5xl font-bold mb-6 flex justify-center items-center h-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-6 px-8 rounded-lg shadow-lg">
+              Welcome To The Dashboard
+            </h1>
+          )}
+
           <Outlet />
         </div>
       </div>

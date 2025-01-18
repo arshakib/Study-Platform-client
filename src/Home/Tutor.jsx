@@ -1,6 +1,16 @@
+/* eslint-disable react/jsx-key */
+import { useQuery } from "@tanstack/react-query";
 import TutorCard from "./TutorCard";
+import axios from "axios";
 
 const Tutor = () => {
+  const { data: tutors = [] } = useQuery({
+    queryKey: ["material"],
+    queryFn: async () => {
+      const { data } = await axios.get(`http://localhost:5000/tutors`);
+      return data;
+    },
+  });
   return (
     <div>
       <section className="pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
@@ -23,26 +33,13 @@ const Tutor = () => {
           </div>
 
           <div className="-mx-4 flex flex-wrap justify-center">
-            <TutorCard
-              name="Coriss Ambady"
-              profession="Web Developer"
-              imageSrc="https://i.ibb.co/T1J9LD4/image-03-2.jpg"
-            />
-            <TutorCard
-              name="Coriss Ambady"
-              profession="Web Developer"
-              imageSrc="https://i.ibb.co/8P6cvVy/image-01-1.jpg"
-            />
-            <TutorCard
-              name="Coriss Ambady"
-              profession="Web Developer"
-              imageSrc="https://i.ibb.co/30tGtjP/image-04.jpg"
-            />
-            <TutorCard
-              name="Coriss Ambady"
-              profession="Web Developer"
-              imageSrc="https://i.ibb.co/yVVT0Dp/image-02-2.jpg"
-            />
+            {tutors.map((tutor) => (
+              <TutorCard
+                name={tutor?.name}
+                profession={tutor?.email}
+                imageSrc={tutor.photoURL}
+              />
+            ))}
           </div>
         </div>
       </section>
