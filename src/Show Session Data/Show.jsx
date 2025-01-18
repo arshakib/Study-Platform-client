@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../Context/Context";
 import { useContext } from "react";
 
@@ -98,14 +98,32 @@ const Show = () => {
           </p>
         </div>
 
-        <div>
-          {dbDate > today ? (
-            <button
+        {/* <Link
+              to={`/payment/${id.id}`}
               disabled={userData?.role !== "student"}
               className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
             >
               Book Now
-            </button>
+            </Link> */}
+
+        <div>
+          {dbDate < today ? (
+            registrationFee == 0 ? (
+              <Link
+                disabled={userData?.role !== "student"}
+                className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+              >
+                Book This Free Session Now
+              </Link>
+            ) : (
+              <Link
+                disabled={userData?.role !== "student"}
+                to={`/payment/${id.id}`}
+                className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+              >
+                Book Now
+              </Link>
+            )
           ) : (
             <button
               className="w-full bg-gray-400 text-white py-2 px-4 rounded-lg cursor-not-allowed"

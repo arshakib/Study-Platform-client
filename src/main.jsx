@@ -21,6 +21,7 @@ import CreateNote from "./Dashboard/Student Dashboard/CreateNote";
 import ViewNote from "./Dashboard/Student Dashboard/ViewNote";
 import Show from "./Show Session Data/Show";
 import Private from "./Routes/Private";
+import Payment from "./Payment/Payment";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/payment/:id",
+        element: <Payment />,
       },
     ],
   },
