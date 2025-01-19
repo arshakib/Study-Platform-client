@@ -16,7 +16,15 @@ const FeeModal = ({ refetch, session }) => {
     };
     try {
       axios
-        .patch(`http://localhost:5000/adminup/${_id}`, newFee)
+        .patch(
+          `http://localhost:5000/adminup/${_id}`,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            },
+          },
+          newFee
+        )
         .then((res) => {
           console.log(res.data);
           if (res.data.modifiedCount) {

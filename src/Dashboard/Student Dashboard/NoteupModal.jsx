@@ -18,7 +18,15 @@ const NoteupModal = ({ refetch, notedata }) => {
     };
 
     axios
-      .patch(`http://localhost:5000/notes/${_id}`, updateData)
+      .patch(
+        `http://localhost:5000/notes/${_id}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        },
+        updateData
+      )
       .then((res) => {
         console.log(res.data);
         if (res.data.modifiedCount) {

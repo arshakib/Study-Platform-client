@@ -17,7 +17,12 @@ const ViewNote = () => {
     queryKey: ["notes", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/notes/${user?.email}`
+        `http://localhost:5000/notes/${user?.email}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
       );
       return data;
     },
@@ -30,7 +35,11 @@ const ViewNote = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:5000/notes/${id}`)
+      .delete(`http://localhost:5000/notes/${id}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      })
       .then(
         (res) => console.log(res.data),
         refetch(),

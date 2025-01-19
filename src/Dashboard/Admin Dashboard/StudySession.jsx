@@ -21,7 +21,11 @@ const StudySession = () => {
   } = useQuery({
     queryKey: ["session"],
     queryFn: async () => {
-      const { data } = await axios.get(`http://localhost:5000/adminsessions`);
+      const { data } = await axios.get(`http://localhost:5000/adminsessions`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      });
       return data;
     },
   });
@@ -34,7 +38,15 @@ const StudySession = () => {
     };
     try {
       axios
-        .patch(`http://localhost:5000/adminup/${id}`, updateData)
+        .patch(
+          `http://localhost:5000/adminup/${id}`,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            },
+          },
+          updateData
+        )
         .then((res) => {
           console.log(res.data);
           if (res.data.modifiedCount) {

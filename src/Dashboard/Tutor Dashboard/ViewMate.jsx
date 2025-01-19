@@ -15,7 +15,12 @@ const ViewMate = () => {
     queryKey: ["material"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/materials/${user?.email}`
+        `http://localhost:5000/materials/${user?.email}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
       );
       return data;
     },

@@ -27,6 +27,9 @@ import ViewBooked from "./Dashboard/Student Dashboard/ViewBooked";
 import BookedMeta from "./Dashboard/Student Dashboard/BookedMeta";
 import UpdateSession from "./Dashboard/Admin Dashboard/UpdateSession";
 import ViewSession from "./Dashboard/Tutor Dashboard/ViewSession";
+import TutorRoute from "./Routes/TutorRoute";
+import AdminRoute from "./Routes/AdminRoute";
+import StudentRoute from "./Routes/StudentRoute";
 
 const queryClient = new QueryClient();
 
@@ -77,7 +80,9 @@ const router = createBrowserRouter([
         path: "createsession",
         element: (
           <Private>
-            <CreateSession />
+            <TutorRoute>
+              <CreateSession />
+            </TutorRoute>
           </Private>
         ),
       },
@@ -85,7 +90,9 @@ const router = createBrowserRouter([
         path: "tutorsession",
         element: (
           <Private>
-            <TutorSession />
+            <TutorRoute>
+              <TutorSession />
+            </TutorRoute>
           </Private>
         ),
       },
@@ -93,7 +100,9 @@ const router = createBrowserRouter([
         path: "materials",
         element: (
           <Private>
-            <UploadMate />
+            <TutorRoute>
+              <UploadMate />
+            </TutorRoute>
           </Private>
         ),
       },
@@ -101,7 +110,9 @@ const router = createBrowserRouter([
         path: "viewmaterials",
         element: (
           <Private>
-            <ViewMate />
+            <TutorRoute>
+              <ViewMate />
+            </TutorRoute>
           </Private>
         ),
       },
@@ -109,7 +120,9 @@ const router = createBrowserRouter([
         path: "allusers",
         element: (
           <Private>
-            <Allusers />
+            <AdminRoute>
+              <Allusers />
+            </AdminRoute>
           </Private>
         ),
       },
@@ -117,7 +130,9 @@ const router = createBrowserRouter([
         path: "viewallsession",
         element: (
           <Private>
-            <StudySession />
+            <AdminRoute>
+              <StudySession />
+            </AdminRoute>
           </Private>
         ),
       },
@@ -125,7 +140,9 @@ const router = createBrowserRouter([
         path: "viewallmaterials",
         element: (
           <Private>
-            <AllMate />
+            <AdminRoute>
+              <AllMate />
+            </AdminRoute>
           </Private>
         ),
       },
@@ -133,7 +150,9 @@ const router = createBrowserRouter([
         path: "createnote",
         element: (
           <Private>
-            <CreateNote />
+            <StudentRoute>
+              <CreateNote />
+            </StudentRoute>
           </Private>
         ),
       },
@@ -141,7 +160,9 @@ const router = createBrowserRouter([
         path: "viewnote",
         element: (
           <Private>
-            <ViewNote />
+            <StudentRoute>
+              <ViewNote />
+            </StudentRoute>
           </Private>
         ),
       },
@@ -149,7 +170,9 @@ const router = createBrowserRouter([
         path: "bookedsession",
         element: (
           <Private>
-            <BookedCards />
+            <StudentRoute>
+              <BookedCards />
+            </StudentRoute>
           </Private>
         ),
       },
@@ -157,17 +180,27 @@ const router = createBrowserRouter([
         path: "viewbookedmeta",
         element: (
           <Private>
-            <BookedMeta />
+            <StudentRoute>
+              <BookedMeta />
+            </StudentRoute>
           </Private>
         ),
       },
       {
         path: "upadatesession/:id",
-        element: <UpdateSession />,
+        element: (
+          <Private>
+            <UpdateSession />
+          </Private>
+        ),
       },
       {
         path: "tutorsession/tutorsessionview/:id",
-        element: <ViewSession />,
+        element: (
+          <Private>
+            <ViewSession />
+          </Private>
+        ),
       },
     ],
   },

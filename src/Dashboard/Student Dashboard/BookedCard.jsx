@@ -10,7 +10,12 @@ const BookedCard = ({ session }) => {
     queryKey: ["bookedData", bookedsessionId],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/bookedsessiondata/${bookedsessionId}`
+        `http://localhost:5000/bookedsessiondata/${bookedsessionId}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
       );
       return data;
     },

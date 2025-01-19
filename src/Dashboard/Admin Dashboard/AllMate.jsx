@@ -10,7 +10,11 @@ const AllMate = () => {
   } = useQuery({
     queryKey: ["material"],
     queryFn: async () => {
-      const { data } = await axios.get(`http://localhost:5000/materials`);
+      const { data } = await axios.get(`http://localhost:5000/materials`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      });
       return data;
     },
   });

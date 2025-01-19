@@ -35,7 +35,12 @@ const BookedCards = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/bookedsessions/${user?.email}?page=${currentPage}&size=${item}`
+        `http://localhost:5000/bookedsessions/${user?.email}?page=${currentPage}&size=${item}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
       )
       .then((res) => setSessionData(res.data));
   }, [currentPage, item, user?.email]);

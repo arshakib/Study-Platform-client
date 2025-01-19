@@ -15,7 +15,12 @@ const Cheackout = ({ id }) => {
     queryKey: ["amount"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/onesessions/${id}`
+        `http://localhost:5000/onesessions/${id}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
       );
       return data;
     },

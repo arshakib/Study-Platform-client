@@ -19,7 +19,12 @@ const ViewSession = () => {
     queryKey: ["reviews", id.id],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/reviews/${id.id}`
+        `http://localhost:5000/reviews/${id.id}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
       );
       return data;
     },

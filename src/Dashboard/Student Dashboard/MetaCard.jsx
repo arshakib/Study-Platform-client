@@ -11,7 +11,12 @@ const MetaCard = ({ tutoremail }) => {
     queryKey: ["meta", bookedsessionId],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/bookedmeterials/${bookedsessionId}`
+        `http://localhost:5000/bookedmeterials/${bookedsessionId}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
       );
       return data;
     },

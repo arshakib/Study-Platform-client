@@ -11,7 +11,12 @@ const BookedMeta = () => {
     queryKey: ["tutoremail", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/tutoremail/${user?.email}`
+        `http://localhost:5000/tutoremail/${user?.email}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
       );
       return data;
     },

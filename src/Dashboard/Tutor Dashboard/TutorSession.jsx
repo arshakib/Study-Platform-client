@@ -17,7 +17,12 @@ const TutorSession = () => {
     queryKey: ["session", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/sessions/${user?.email}`
+        `http://localhost:5000/sessions/${user?.email}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
       );
       return data;
     },
@@ -25,7 +30,11 @@ const TutorSession = () => {
   const { data: getreject = [] } = useQuery({
     queryKey: ["getreject"],
     queryFn: async () => {
-      const { data } = await axios.get(`http://localhost:5000/rejectdata`);
+      const { data } = await axios.get(`http://localhost:5000/rejectdata`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      });
       return data;
     },
   });

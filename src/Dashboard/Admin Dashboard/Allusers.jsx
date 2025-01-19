@@ -11,7 +11,11 @@ const Allusers = () => {
   const { data: userData = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await axios.get(`http://localhost:5000/users`);
+      const { data } = await axios.get(`http://localhost:5000/users`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      });
       return data;
     },
   });
@@ -24,7 +28,12 @@ const Allusers = () => {
     const fetchSearchResults = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/users?search=${search}`
+          `http://localhost:5000/users?search=${search}`,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            },
+          }
         );
         setApiData(data || []);
       } catch (error) {

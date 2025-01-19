@@ -26,7 +26,15 @@ const DeleteModal = ({ item }) => {
     };
     try {
       axios
-        .patch(`http://localhost:5000/materials/${_id}`, updateData)
+        .patch(
+          `http://localhost:5000/materials/${_id}`,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            },
+          },
+          updateData
+        )
         .then((res) => {
           console.log(res.data);
           if (res.data.modifiedCount) {
