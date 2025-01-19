@@ -25,6 +25,8 @@ import Payment from "./Payment/Payment";
 import BookedCards from "./Dashboard/Student Dashboard/BookedCards";
 import ViewBooked from "./Dashboard/Student Dashboard/ViewBooked";
 import BookedMeta from "./Dashboard/Student Dashboard/BookedMeta";
+import UpdateSession from "./Dashboard/Admin Dashboard/UpdateSession";
+import ViewSession from "./Dashboard/Tutor Dashboard/ViewSession";
 
 const queryClient = new QueryClient();
 
@@ -65,51 +67,107 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <Private>
+        <Dashboard />
+      </Private>
+    ),
     children: [
       {
         path: "createsession",
-        element: <CreateSession />,
+        element: (
+          <Private>
+            <CreateSession />
+          </Private>
+        ),
       },
       {
         path: "tutorsession",
-        element: <TutorSession />,
+        element: (
+          <Private>
+            <TutorSession />
+          </Private>
+        ),
       },
       {
         path: "materials",
-        element: <UploadMate />,
+        element: (
+          <Private>
+            <UploadMate />
+          </Private>
+        ),
       },
       {
         path: "viewmaterials",
-        element: <ViewMate />,
+        element: (
+          <Private>
+            <ViewMate />
+          </Private>
+        ),
       },
       {
         path: "allusers",
-        element: <Allusers />,
+        element: (
+          <Private>
+            <Allusers />
+          </Private>
+        ),
       },
       {
         path: "viewallsession",
-        element: <StudySession />,
+        element: (
+          <Private>
+            <StudySession />
+          </Private>
+        ),
       },
       {
         path: "viewallmaterials",
-        element: <AllMate />,
+        element: (
+          <Private>
+            <AllMate />
+          </Private>
+        ),
       },
       {
         path: "createnote",
-        element: <CreateNote />,
+        element: (
+          <Private>
+            <CreateNote />
+          </Private>
+        ),
       },
       {
         path: "viewnote",
-        element: <ViewNote />,
+        element: (
+          <Private>
+            <ViewNote />
+          </Private>
+        ),
       },
       {
         path: "bookedsession",
-        element: <BookedCards />,
+        element: (
+          <Private>
+            <BookedCards />
+          </Private>
+        ),
       },
       {
         path: "viewbookedmeta",
-        element: <BookedMeta />,
+        element: (
+          <Private>
+            <BookedMeta />
+          </Private>
+        ),
+      },
+      {
+        path: "upadatesession/:id",
+        element: <UpdateSession />,
+      },
+      {
+        path: "tutorsession/tutorsessionview/:id",
+        element: <ViewSession />,
       },
     ],
   },

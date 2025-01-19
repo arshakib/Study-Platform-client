@@ -1,8 +1,10 @@
+/* eslint-disable react/jsx-key */
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/Context";
 import { toast, ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const TutorSession = () => {
   const { user } = useContext(AuthContext);
@@ -17,6 +19,13 @@ const TutorSession = () => {
       const { data } = await axios.get(
         `http://localhost:5000/sessions/${user?.email}`
       );
+      return data;
+    },
+  });
+  const { data: getreject = [] } = useQuery({
+    queryKey: ["getreject"],
+    queryFn: async () => {
+      const { data } = await axios.get(`http://localhost:5000/rejectdata`);
       return data;
     },
   });
@@ -104,9 +113,26 @@ const TutorSession = () => {
                     </div>
                   </div>
                 </td>
-                <td>{session?.status}</td>
                 <td>
-                  <button className=" btn  btn-xs">details</button>
+                  {session?.status}
+                  {session?.status === "rejected" &&
+                    getreject.map(
+                      (reject) =>
+                        reject?.rejectSessionid === session?._id && (
+                          <div className="bg-red-500 my-2 p-2 rounded-md text-white">
+                            <div>{reject?.reject}</div>
+                            {reject?.feedback}
+                          </div>
+                        )
+                    )}
+                </td>
+                <td>
+                  <Link
+                    to={`tutorsessionview/${session?._id}`}
+                    className=" btn  btn-xs"
+                  >
+                    details
+                  </Link>
                 </td>
                 <th>
                   <td>

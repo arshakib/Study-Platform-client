@@ -2,10 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import FeeModal from "./FeeModal";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { updatesession } from "../Dashboard";
+import { Link } from "react-router-dom";
+import Rejectionreason from "./Rejectionreason ";
 
 const StudySession = () => {
+  const { setUpdatedata } = useContext(updatesession);
   const [regfee, setRegfee] = useState({});
+  const [update, setUpdate] = useState({});
+  const [reject, setReject] = useState({});
+  console.log(reject);
+
   const {
     data: sessionData = [],
     isLoading,
@@ -13,7 +21,7 @@ const StudySession = () => {
   } = useQuery({
     queryKey: ["session"],
     queryFn: async () => {
-      const { data } = await axios.get(`http://localhost:5000/sessions`);
+      const { data } = await axios.get(`http://localhost:5000/adminsessions`);
       return data;
     },
   });
@@ -89,6 +97,10 @@ const StudySession = () => {
     setRegfee(data);
   };
 
+  const test2 = (data) => {
+    setUpdate(data);
+  };
+
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
@@ -156,12 +168,20 @@ const StudySession = () => {
                       defaultValue={session?.status}
                       className="select select-bordered w-full max-w-xs"
                       onChange={(e) => {
-                        status(e.target.value, session._id);
+                        const selectedStatus = e.target.value;
+                        status(selectedStatus, session._id);
+                        setReject(session._id);
+                        if (selectedStatus === "rejected") {
+                          const modal = document.getElementById("my_modal_55");
+                          if (modal) {
+                            modal.showModal();
+                          }
+                        }
                       }}
                     >
-                      <option>pending</option>
-                      <option>approved</option>
-                      <option>rejected</option>
+                      <option value="pending">Pending</option>
+                      <option value="approved">Approved</option>
+                      <option value="rejected">Rejected</option>
                     </select>
 
                     <br />
@@ -171,12 +191,16 @@ const StudySession = () => {
                   </td>
                   <th>
                     <td>
-                      <button
+                      <Link
                         disabled={session?.status == "pending"}
                         className="btn mr-5 btn-xs"
+                        onClick={() => {
+                          test2(session);
+                        }}
+                        to={`/dashboard/upadatesession/${session?._id}`}
                       >
                         Update
-                      </button>
+                      </Link>
                       <button
                         onClick={() => {
                           handleDelete(session?._id);
@@ -196,6 +220,8 @@ const StudySession = () => {
         </div>
       </div>
       <FeeModal refetch={refetch} session={regfee} />
+      <Rejectionreason refetch={refetch} reject={reject} />
+      {setUpdatedata(update)}
     </div>
   );
 };

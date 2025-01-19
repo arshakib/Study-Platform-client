@@ -1,14 +1,17 @@
 import { Outlet, useLocation } from "react-router-dom";
 import TutorMenu from "./Tutor Dashboard/TutorMenu";
-import { useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { AuthContext } from "../Context/Context";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import AdminMenu from "./Admin Dashboard/AdminMenu";
 import StudentMenu from "./Student Dashboard/StudentMenu";
 
+export const updatesession = createContext(null);
+
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
+  const [updatedata, setUpdatedata] = useState({});
 
   const { data: userData = [] } = useQuery({
     queryKey: ["user", user?.email],
@@ -34,8 +37,9 @@ const Dashboard = () => {
               Welcome To The Dashboard
             </h1>
           )}
-
-          <Outlet />
+          <updatesession.Provider value={{ updatedata, setUpdatedata }}>
+            {<Outlet />}
+          </updatesession.Provider>
         </div>
       </div>
     </div>

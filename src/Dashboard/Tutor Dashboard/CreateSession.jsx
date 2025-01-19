@@ -16,10 +16,18 @@ const CreateSession = () => {
     const image = form.image.files[0];
     const formData = new FormData();
     formData.append("image", image);
-    const registrationStartDate = new Date(form.registrationStartDate.value);
-    const registrationEndDate = new Date(form.registrationEndDate.value);
-    const classStartDate = form.classStartDate.value;
-    const classEndDate = form.classEndDate.value;
+    const registrationStartDate = new Date(form.registrationStartDate.value)
+      .toISOString()
+      .split("T")[0];
+    const registrationEndDate = new Date(form.registrationEndDate.value)
+      .toISOString()
+      .split("T")[0];
+    const classStartDate = new Date(form.classStartDate.value)
+      .toISOString()
+      .split("T")[0];
+    const classEndDate = new Date(form.classEndDate.value)
+      .toISOString()
+      .split("T")[0];
     const duration = form.duration.value;
     const description = form.description.value;
     const registrationFee = parseInt(form.registrationFee.value);
