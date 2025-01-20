@@ -5,29 +5,62 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const Cards = () => {
-  const { data: number = [] } = useQuery({
+  // const { data: number = [] } = useQuery({
+  //   queryKey: ["length"],
+  //   queryFn: async () => {
+  //     const { data } = await axios.get(
+  //       `https://study-ten-blond.vercel.app/sessionnumber`
+  //     );
+  //     return data;
+  //   },
+  // });
+
+  // console.log(typeof number.count);
+  // const [count, setCount] = useState(0);
+  // const [currentPage, setCurrentPage] = useState(0);
+  // const [sessionData, setSessionData] = useState([]);
+  // const item = 6;
+
+  // useEffect(() => {
+  //   const numberofPages = Math.ceil(number?.count / item);
+  //   setCount(numberofPages);
+  // }, [number?.count]);
+
+  // const pages = [...Array(count).keys()];
+
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `https://study-ten-blond.vercel.app/sessions?page=${currentPage}&size=${item}`
+  //     )
+  //     .then((res) => setSessionData(res.data));
+  // }, [currentPage, item]);
+
+  const { data: number = {} } = useQuery({
     queryKey: ["length"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/sessionnumber`
+        "https://study-ten-blond.vercel.app/sessionnumber"
       );
       return data;
     },
   });
 
   console.log(number?.count);
+
+  const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [sessionData, setSessionData] = useState([]);
   const item = 6;
-  const numberofPages = Math.ceil(11 / item);
 
-  const pages = [...Array(numberofPages).keys()];
+  useEffect(() => {
+    // Ensure `number?.count` is a valid number before calculating
+    const totalItems = number?.count || 0; // Fallback to 0 if undefined
+    const numberofPages = Math.ceil(totalItems / item); // Guard against NaN
+    setCount(numberofPages);
+  }, [number?.count, item]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`https://study-ten-blond.vercel.app/sessions`)
-  //     .then((res) => setSessionData(res.data));
-  // }, []);
+  const pages = [...Array(count || 0).keys()]; // Guard against NaN here too
 
   useEffect(() => {
     axios

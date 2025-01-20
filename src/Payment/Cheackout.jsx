@@ -35,18 +35,42 @@ const Cheackout = ({ id }) => {
     },
   });
 
-  console.log(stop);
-  console.log(id);
-
   const paymentInfo = {
     bookedsessionId: sessionData?._id,
     studentId: user?.email,
     studentName: user?.displayName,
     tutorEmail: sessionData?.tutorEmail,
   };
+  //   if (id === stop?.bookedsessionId) {
+  //     toast.error("Already Booked", {
+  //       position: "top-right",
+  //       autoClose: 2000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //     });
+  //   } else {
+  //     axios
+  //       .post("https://study-ten-blond.vercel.app/create-payment-intent", {
+  //         price: sessionData?.registrationFee || 0,
+  //       })
+  //       .then((res) => {
+  //         setClientSecret(res.data.clientSecret);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error creating payment intent:", error);
+  //       });
+  //   }
+  // }, [id, stop?.bookedsessionId, sessionData?.registrationFee]);
 
-  console.log(sessionData);
   useEffect(() => {
+    if (!sessionData?.registrationFee) {
+      console.log("Registration Fee is not available yet.");
+      return;
+    }
+
     if (id === stop?.bookedsessionId) {
       toast.error("Already Booked", {
         position: "top-right",
@@ -63,11 +87,13 @@ const Cheackout = ({ id }) => {
           price: sessionData?.registrationFee,
         })
         .then((res) => {
-          console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         })
         .catch((error) => {
-          console.error("Error creating payment intent:", error);
+          console.error(
+            "Error creating payment intent:",
+            error.response?.data || error.message
+          );
         });
     }
   }, [id, stop?.bookedsessionId, sessionData?.registrationFee]);
@@ -110,19 +136,20 @@ const Cheackout = ({ id }) => {
     } else {
       console.log("[paymentIntent]", paymentIntent);
       try {
-        const { data } = await axios.post(
-          "https://study-ten-blond.vercel.app/payment",
-          paymentInfo
-        );
-        toast.success("Payment successful", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        const { data } = await axios
+          .post("https://study-ten-blond.vercel.app/payment", paymentInfo)
+          .then((res) => {
+            console.log(res.data);
+            toast.success("Booking successful", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          });
         console.log(data);
       } catch (error) {
         console.log(error);

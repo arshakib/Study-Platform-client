@@ -19,18 +19,18 @@ const BookedCards = () => {
   });
 
   console.log(number?.count);
+  const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [sessionData, setSessionData] = useState([]);
   const item = 6;
-  const numberofPages = Math.ceil(11 / item);
+  useEffect(() => {
+    // Ensure `number?.count` is a valid number before calculating
+    const totalItems = number?.count || 0; // Fallback to 0 if undefined
+    const numberofPages = Math.ceil(totalItems / item); // Guard against NaN
+    setCount(numberofPages);
+  }, [number?.count, item]);
 
-  const pages = [...Array(numberofPages).keys()];
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`https://study-ten-blond.vercel.app/sessions`)
-  //     .then((res) => setSessionData(res.data));
-  // }, []);
+  const pages = [...Array(count || 0).keys()];
 
   useEffect(() => {
     axios

@@ -7,6 +7,8 @@ import axios from "axios";
 const MetaCard = ({ tutoremail }) => {
   const { bookedsessionId } = tutoremail;
 
+  console.log(tutoremail);
+
   const { data: MetaItem = [] } = useQuery({
     queryKey: ["meta", bookedsessionId],
     queryFn: async () => {
@@ -22,25 +24,30 @@ const MetaCard = ({ tutoremail }) => {
     },
   });
 
+  console.log(MetaItem);
   const { materialimage, sessionId, link } = MetaItem[0] || {};
   return (
     <div>
-      <div>
+      {MetaItem[0] == undefined ? (
+        <div></div>
+      ) : (
         <div>
           <div>
-            <div className="card bg-base-100 w-80 shadow-xl">
-              <figure className="px-10 pt-10">
-                <img src={materialimage} alt="Shoes" className="rounded-xl" />
-              </figure>
-              <div className="card-body items-center text-center">
-                <p>Session Id: {sessionId}</p>
-                <p className="text-sm">Material Img Link: {materialimage}</p>
-                <p className="text-sm"> Material Link: {link}</p>
+            <div>
+              <div className="card bg-base-100 w-80 shadow-xl">
+                <figure className="px-10 pt-10">
+                  <img src={materialimage} alt="Shoes" className="rounded-xl" />
+                </figure>
+                <div className="card-body items-center text-center">
+                  <p>Session Id: {sessionId}</p>
+                  <p className="text-sm">Material Img Link: {materialimage}</p>
+                  <p className="text-sm"> Material Link: {link}</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
