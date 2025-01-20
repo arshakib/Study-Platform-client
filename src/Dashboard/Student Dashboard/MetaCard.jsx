@@ -11,7 +11,7 @@ const MetaCard = ({ tutoremail }) => {
     queryKey: ["meta", bookedsessionId],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/bookedmeterials/${bookedsessionId}`,
+        `https://study-ten-blond.vercel.app/bookedmeterials/${bookedsessionId}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,

@@ -17,7 +17,7 @@ const Dashboard = () => {
     queryKey: ["user", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/users/${user?.email}`
+        `https://study-ten-blond.vercel.app/users/${user?.email}`
       );
       return data;
     },
@@ -25,7 +25,7 @@ const Dashboard = () => {
   const location = useLocation();
   return (
     <div className="h-[100vh] w-full">
-      <div className="flex gap-4  ">
+      <div className="flex gap-4 ">
         <div className="w-[20%] h-[100vh] bg-gray-200 p-4 sticky top-0">
           {userData?.role === "admin" && <AdminMenu />}
           {userData?.role === "tutor" && <TutorMenu />}

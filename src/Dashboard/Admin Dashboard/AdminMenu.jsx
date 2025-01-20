@@ -14,21 +14,22 @@ import { NavLink } from "react-router-dom";
 
 export default function DefaultSidebar() {
   return (
-    <Card className="h-full w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
-      <div className="mb-2 p-4">
+    <Card className="h-full w-full max-w-[20rem] sm:max-w-[16rem] lg:max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 -z-10">
+      <div className="mb-2 p-4 ">
         <Typography variant="h5" color="blue-gray">
           Admin Sidebar
         </Typography>
       </div>
-      <List>
+      <List className="space-y-2">
         <ListItem>
           <ListItemPrefix>
             <PresentationChartBarIcon className="h-5 w-5" />
           </ListItemPrefix>
-
           <NavLink
             className={({ isActive }) =>
-              isActive ? "text-blue-900 font-semibold underline" : ""
+              isActive
+                ? "text-blue-900 font-semibold underline text-sm sm:text-base"
+                : "text-sm sm:text-base"
             }
             to="/dashboard/allusers"
           >
@@ -41,7 +42,9 @@ export default function DefaultSidebar() {
           </ListItemPrefix>
           <NavLink
             className={({ isActive }) =>
-              isActive ? "text-blue-900 font-semibold underline" : ""
+              isActive
+                ? "text-blue-900 font-semibold underline text-sm sm:text-base"
+                : "text-sm sm:text-base"
             }
             to="/dashboard/viewallsession"
           >
@@ -54,7 +57,9 @@ export default function DefaultSidebar() {
           </ListItemPrefix>
           <NavLink
             className={({ isActive }) =>
-              isActive ? "text-blue-900 font-semibold underline" : ""
+              isActive
+                ? "text-blue-900 font-semibold underline text-sm sm:text-base"
+                : "text-sm sm:text-base"
             }
             to="/dashboard/viewallmaterials"
           >

@@ -75,25 +75,27 @@ const CreateSession = () => {
     };
 
     try {
-      axios.post("http://localhost:5000/sessions", session).then((res) => {
-        if (res.data.insertedId) {
-          toast.success("Session Created Successfully", {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
-      });
+      axios
+        .post("https://study-ten-blond.vercel.app/sessions", session)
+        .then((res) => {
+          if (res.data.insertedId) {
+            toast.success("Session Created Successfully", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+        });
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div className="w-full mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className="w-full mx-auto p-6 bg-white shadow-md rounded-lg z-30">
       <ToastContainer />
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Create Session</h1>
       <form onSubmit={handelSubmit} className="space-y-4">

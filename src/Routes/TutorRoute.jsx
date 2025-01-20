@@ -11,7 +11,7 @@ const TutorRoute = ({ children }) => {
     queryKey: ["isTutor", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/users/${user?.email}`
+        `https://study-ten-blond.vercel.app/users/${user?.email}`
       );
       return data;
     },

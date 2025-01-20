@@ -19,7 +19,7 @@ const NoteupModal = ({ refetch, notedata }) => {
 
     axios
       .patch(
-        `http://localhost:5000/notes/${_id}`,
+        `https://study-ten-blond.vercel.app/notes/${_id}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,

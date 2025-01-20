@@ -10,7 +10,7 @@ const UploadMate = () => {
     queryKey: ["session", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/sessions/${user?.email}`,
+        `https://study-ten-blond.vercel.app/sessions/${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,
@@ -44,7 +44,7 @@ const UploadMate = () => {
 
     try {
       axios
-        .post("http://localhost:5000/materials", materialData)
+        .post("https://study-ten-blond.vercel.app/materials", materialData)
         .then((res) => {
           if (res.data.insertedId) {
             toast.success("Material Uploaded Successfully", {
@@ -81,7 +81,7 @@ const UploadMate = () => {
   return (
     <div>
       <ToastContainer />
-      <div className="my-10 grid grid-cols-3 gap-4 w-11/12 mx-auto">
+      <div className="my-10 grid lg:grid-cols-3 grid-cols-1 gap-4 w-11/12 mx-auto">
         {session.map((session) => (
           // eslint-disable-next-line react/jsx-key
           <div className="card card-compact bg-base-100 w-80 shadow-xl">

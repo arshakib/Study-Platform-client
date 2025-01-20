@@ -17,7 +17,7 @@ const TutorSession = () => {
     queryKey: ["session", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/sessions/${user?.email}`,
+        `https://study-ten-blond.vercel.app/sessions/${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,
@@ -30,11 +30,14 @@ const TutorSession = () => {
   const { data: getreject = [] } = useQuery({
     queryKey: ["getreject"],
     queryFn: async () => {
-      const { data } = await axios.get(`http://localhost:5000/rejectdata`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("access-token")}`,
-        },
-      });
+      const { data } = await axios.get(
+        `https://study-ten-blond.vercel.app/rejectdata`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
+      );
       return data;
     },
   });
@@ -43,7 +46,7 @@ const TutorSession = () => {
 
   const handleSubmit = (id) => {
     axios
-      .patch(`http://localhost:5000/session/${id}`)
+      .patch(`https://study-ten-blond.vercel.app/session/${id}`)
       .then(() => {
         refetch();
         toast.success("Session Approved", {
@@ -73,31 +76,31 @@ const TutorSession = () => {
   console.log(session);
   if (isLoading) return <p>Loading...</p>;
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full p-4">
       <ToastContainer />
       <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead>
+        <table className="table w-full">
+          {/* Table Head */}
+          <thead className="bg-gray-100">
             <tr>
-              <th>Session Title</th>
-              <th>Registration Fee</th>
-              <th>Status</th>
-              <th>View</th>
-              <th>Action</th>
+              <th className="text-left px-4 py-2">Session Title</th>
+              <th className="text-left px-4 py-2">Registration Fee</th>
+              <th className="text-left px-4 py-2">Status</th>
+              <th className="text-left px-4 py-2">View</th>
+              <th className="text-left px-4 py-2">Action</th>
             </tr>
           </thead>
           <tbody>
             {session?.map((session) => (
-              // eslint-disable-next-line react/jsx-key
-              <tr>
-                <th>
+              <tr key={session?._id} className="border-b">
+                <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
                         <img
                           src={session?.photoURL}
-                          alt="Avatar Tailwind CSS Component"
+                          alt="Avatar"
+                          className="object-cover"
                         />
                       </div>
                     </div>
@@ -112,17 +115,11 @@ const TutorSession = () => {
                       </div>
                     </div>
                   </div>
-                </th>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <div className="font-bold">
-                        $ {session?.registrationFee}
-                      </div>
-                    </div>
-                  </div>
                 </td>
-                <td>
+                <td className="px-4 py-3">
+                  <div className="font-bold">$ {session?.registrationFee}</div>
+                </td>
+                <td className="px-4 py-3">
                   {session?.status}
                   {session?.status === "rejected" &&
                     getreject.map(
@@ -135,27 +132,24 @@ const TutorSession = () => {
                         )
                     )}
                 </td>
-                <td>
+                <td className="px-4 py-3">
                   <Link
                     to={`tutorsessionview/${session?._id}`}
-                    className=" btn  btn-xs"
+                    className="btn btn-primary btn-xs"
                   >
-                    details
+                    Details
                   </Link>
                 </td>
-                <th>
-                  <td>
-                    <button
-                      onClick={() => handleSubmit(session?._id)}
-                      className="btn  btn-xs"
-                    >
-                      ReSubmit
-                    </button>
-                  </td>
-                </th>
+                <td className="px-4 py-3">
+                  <button
+                    onClick={() => handleSubmit(session?._id)}
+                    className="btn btn-secondary btn-xs"
+                  >
+                    ReSubmit
+                  </button>
+                </td>
               </tr>
             ))}
-            {/* row 1 */}
           </tbody>
         </table>
       </div>

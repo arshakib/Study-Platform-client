@@ -13,7 +13,7 @@ const ViewBooked = () => {
     queryKey: ["viewbookeddata", id],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/onesessions/${id}`,
+        `https://study-ten-blond.vercel.app/onesessions/${id}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,
@@ -52,7 +52,7 @@ const ViewBooked = () => {
 
     try {
       await axios
-        .post("http://localhost:5000/collectreview", data)
+        .post("https://study-ten-blond.vercel.app/collectreview", data)
         .then((res) => {
           if (res.data.insertedId) {
             toast.success("Review Added Successfully", {

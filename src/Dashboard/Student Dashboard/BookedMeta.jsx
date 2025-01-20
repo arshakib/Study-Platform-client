@@ -11,7 +11,7 @@ const BookedMeta = () => {
     queryKey: ["tutoremail", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/tutoremail/${user?.email}`,
+        `https://study-ten-blond.vercel.app/tutoremail/${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,

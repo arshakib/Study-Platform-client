@@ -15,18 +15,17 @@ import { NavLink } from "react-router-dom";
 
 export default function DefaultSidebar() {
   return (
-    <Card className="h-full w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
-      <div className="mb-2 p-4">
+    <Card className="h-full w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 md:max-w-[16rem] lg:w-[20rem] ">
+      <div className="mb-2 p-4 sm:w-10">
         <Typography variant="h5" color="blue-gray">
           Tutor Sidebar
         </Typography>
       </div>
-      <List>
+      <List className="flex flex-col md:flex-row lg:flex-col lg:gap-4">
         <ListItem>
           <ListItemPrefix>
             <PresentationChartBarIcon className="h-5 w-5" />
           </ListItemPrefix>
-
           <NavLink
             className={({ isActive }) =>
               isActive ? "text-blue-900 font-semibold underline" : ""
@@ -59,7 +58,7 @@ export default function DefaultSidebar() {
             }
             to="/dashboard/materials"
           >
-            Upload materials
+            Upload Materials
           </NavLink>
         </ListItem>
         <ListItem>
@@ -72,7 +71,7 @@ export default function DefaultSidebar() {
             }
             to="/dashboard/viewmaterials"
           >
-            View all materials
+            View All Materials
           </NavLink>
         </ListItem>
       </List>

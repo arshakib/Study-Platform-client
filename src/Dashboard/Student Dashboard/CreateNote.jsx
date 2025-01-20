@@ -15,20 +15,22 @@ const CreateNote = () => {
     const note = { email, title, description };
 
     try {
-      axios.post("http://localhost:5000/notes", note).then((data) => {
-        if (data.data.insertedId) {
-          toast.success("Note Created Successfully", {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          form.reset();
-        }
-      });
+      axios
+        .post("https://study-ten-blond.vercel.app/notes", note)
+        .then((data) => {
+          if (data.data.insertedId) {
+            toast.success("Note Created Successfully", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            form.reset();
+          }
+        });
     } catch (error) {
       console.error(error);
     }

@@ -1,48 +1,58 @@
 /* eslint-disable react/jsx-key */
 import { useQuery } from "@tanstack/react-query";
-import TutorCard from "./TutorCard";
+
 import axios from "axios";
 
 const Tutor = () => {
   const { data: tutors = [] } = useQuery({
     queryKey: ["material"],
     queryFn: async () => {
-      const { data } = await axios.get(`http://localhost:5000/tutors`);
+      const { data } = await axios.get(
+        `https://study-ten-blond.vercel.app/tutors`
+      );
       return data;
     },
   });
   return (
     <div>
-      <section className="pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
-        <div className="container mx-auto">
-          <div className="-mx-4 flex flex-wrap">
-            <div className="w-full px-4">
-              <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-                <span className="mb-2 block text-lg font-semibold text-primary">
-                  Our Tutors
-                </span>
-                <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
-                  Our Awesome Tutors
-                </h2>
-                <p className="text-base text-body-color dark:text-dark-6">
-                  There are many variations of passages of Lorem Ipsum available
-                  but the majority have suffered alteration in some form.
-                </p>
-              </div>
-            </div>
+      <div className="bg-white py-24 sm:py-32">
+        <div className="mx-auto grid max-w-7xl gap-20 px-6 lg:px-8 xl:grid-cols-3">
+          <div className="max-w-xl">
+            <h2 className="text-3xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-4xl">
+              Meet our Tutors
+            </h2>
+            <p className="mt-6 text-lg/8 text-gray-600">
+              We’re a dynamic group of individuals who are passionate about what
+              we do and dedicated to delivering the best results for our
+              clients.
+            </p>
           </div>
-
-          <div className="-mx-4 flex flex-wrap justify-center">
-            {tutors.map((tutor) => (
-              <TutorCard
-                name={tutor?.name}
-                profession={tutor?.email}
-                imageSrc={tutor.photoURL}
-              />
+          <ul
+            role="list"
+            className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+          >
+            {tutors.map((person) => (
+              <li key={person.name}>
+                <div className="flex items-center gap-x-6">
+                  <img
+                    alt=""
+                    src={person.photoURL}
+                    className="size-16 rounded-full"
+                  />
+                  <div>
+                    <h3 className="text-base/7 font-semibold tracking-tight text-gray-900">
+                      {person.name}
+                    </h3>
+                    <p className="text-sm/6 font-semibold text-indigo-600">
+                      {person.role}
+                    </p>
+                  </div>
+                </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

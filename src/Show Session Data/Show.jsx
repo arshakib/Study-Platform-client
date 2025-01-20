@@ -14,7 +14,7 @@ const Show = () => {
     queryKey: ["length"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/onesessions/${id.id}`
+        `https://study-ten-blond.vercel.app/onesessions/${id.id}`
       );
       return data;
     },
@@ -24,7 +24,7 @@ const Show = () => {
     queryKey: ["user", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/users/${user?.email}`
+        `https://study-ten-blond.vercel.app/users/${user?.email}`
       );
       return data;
     },
@@ -34,7 +34,7 @@ const Show = () => {
     queryKey: ["reviews", id.id],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/reviews/${id.id}`
+        `https://study-ten-blond.vercel.app/reviews/${id.id}`
       );
       return data;
     },
@@ -60,7 +60,7 @@ const Show = () => {
   const freeSession = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/payment",
+        "https://study-ten-blond.vercel.app/payment",
         paymentInfo
       );
       toast.success("Booking successful", {
@@ -104,41 +104,43 @@ const Show = () => {
   return (
     <div className="my-10">
       <ToastContainer />
-      <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">{title}</h1>
+      <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white shadow-md rounded-lg">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
+          {title}
+        </h1>
 
         <div className="mb-4">
-          <p className="text-lg text-gray-700">
+          <p className="text-base sm:text-lg text-gray-700">
             <strong>Tutor Name:</strong> {tutorName}
           </p>
-          <p className="text-lg text-gray-700">
+          <p className="text-base sm:text-lg text-gray-700">
             <strong>Average Rating:</strong> {averageRating} / 5
           </p>
         </div>
 
         <div className="mb-4">
-          <p className="text-gray-600">
+          <p className="text-sm sm:text-base text-gray-600">
             <strong>Description:</strong> {description}
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           <div className="text-gray-700">
-            <p>
+            <p className="text-sm sm:text-base">
               <strong>Registration Start:</strong>{" "}
               {new Date(registrationStartDate).toLocaleDateString()}
             </p>
-            <p>
+            <p className="text-sm sm:text-base">
               <strong>Registration End:</strong>{" "}
               {new Date(registrationEndDate).toLocaleDateString()}
             </p>
           </div>
           <div className="text-gray-700">
-            <p>
+            <p className="text-sm sm:text-base">
               <strong>Class Start Time:</strong>{" "}
               {new Date(classStartDate).toLocaleString()}
             </p>
-            <p>
+            <p className="text-sm sm:text-base">
               <strong>Class End Date:</strong>{" "}
               {new Date(classEndDate).toLocaleDateString()}
             </p>
@@ -146,21 +148,22 @@ const Show = () => {
         </div>
 
         <div className="mb-4">
-          <p className="text-gray-700">
+          <p className="text-sm sm:text-base text-gray-700">
             <strong>Session Duration:</strong> {duration} hours
           </p>
-          <p className="text-gray-700">
-            <strong>Registration Fee:</strong>
+          <p className="text-sm sm:text-base text-gray-700">
+            <strong>Registration Fee:</strong>{" "}
             {registrationFee === 0 ? "Free" : `$${registrationFee}`}
           </p>
         </div>
+
         <div>
           {dbDate > today ? (
             registrationFee == 0 ? (
               <Link
                 disabled={userData?.role !== "student"}
                 onClick={freeSession}
-                className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+                className="w-full bg-blue-500 text-white py-2 px-4 sm:py-3 sm:px-6 rounded-lg hover:bg-blue-600"
               >
                 Book This Free Session Now
               </Link>
@@ -168,14 +171,14 @@ const Show = () => {
               <Link
                 disabled={userData?.role !== "student"}
                 to={`/payment/${id.id}`}
-                className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+                className="w-full bg-blue-500 text-white py-2 px-4 sm:py-3 sm:px-6 rounded-lg hover:bg-blue-600"
               >
                 Book Now
               </Link>
             )
           ) : (
             <button
-              className="w-full bg-gray-400 text-white py-2 px-4 rounded-lg cursor-not-allowed"
+              className="w-full bg-gray-400 text-white py-2 px-4 sm:py-3 sm:px-6 rounded-lg cursor-not-allowed"
               disabled
             >
               Registration Closed
@@ -184,17 +187,23 @@ const Show = () => {
         </div>
 
         <div className="mb-4 mt-4">
-          <h2 className="text-xl font-semibold text-gray-800 mb-2">Reviews</h2>
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">
+            Reviews
+          </h2>
           {reviews.length > 0 ? (
             <ul className="space-y-2">
               {reviews.map((review, index) => (
-                <li key={index} className="bg-gray-100 p-3 rounded-lg">
-                  <p className="text-gray-700">{review?.review}</p>
+                <li key={index} className="bg-gray-100 p-3 sm:p-4 rounded-lg">
+                  <p className="text-sm sm:text-base text-gray-700">
+                    {review?.review}
+                  </p>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-gray-600">No reviews available.</p>
+            <p className="text-sm sm:text-base text-gray-600">
+              No reviews available.
+            </p>
           )}
         </div>
       </div>

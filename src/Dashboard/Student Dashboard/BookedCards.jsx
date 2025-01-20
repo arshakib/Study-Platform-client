@@ -12,7 +12,7 @@ const BookedCards = () => {
     queryKey: ["bookednumber"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/bookednumber/${user?.email}`
+        `https://study-ten-blond.vercel.app/bookednumber/${user?.email}`
       );
       return data;
     },
@@ -28,14 +28,14 @@ const BookedCards = () => {
 
   // useEffect(() => {
   //   axios
-  //     .get(`http://localhost:5000/sessions`)
+  //     .get(`https://study-ten-blond.vercel.app/sessions`)
   //     .then((res) => setSessionData(res.data));
   // }, []);
 
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/bookedsessions/${user?.email}?page=${currentPage}&size=${item}`,
+        `https://study-ten-blond.vercel.app/bookedsessions/${user?.email}?page=${currentPage}&size=${item}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,
