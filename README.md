@@ -2,12 +2,12 @@
 
 ## Live Site
 
-[Live Site URL](https://example.com)
+[Live Site URL](https://imaginative-chebakia-1dc907.netlify.app/)
 
 ## Admin Credentials
 
-- **Username:** admin@example.com
-- **Password:** admin123
+- **Email:** arshakib428@gmail.com
+- **Password:** 123@Artcell
 
 ---
 
