@@ -31,7 +31,7 @@ const Context = ({ children }) => {
         };
 
         return axios
-          .post("https://study-ten-blond.vercel.app/users", userData)
+          .post("http://localhost:5000/users", userData)
           .then((res) => console.log("Server Response:", res))
           .catch((error) => console.error("Axios Error:", error));
       })
@@ -76,7 +76,7 @@ const Context = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         axios
-          .post("https://study-ten-blond.vercel.app/jwt", {
+          .post("http://localhost:5000/jwt", {
             email: currentUser.email,
           })
           .then((data) => {

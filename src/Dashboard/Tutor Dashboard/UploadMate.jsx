@@ -10,7 +10,7 @@ const UploadMate = () => {
     queryKey: ["session", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/sessions/${user?.email}`,
+        `http://localhost:5000/sessions/${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,
@@ -44,7 +44,7 @@ const UploadMate = () => {
 
     try {
       axios
-        .post("https://study-ten-blond.vercel.app/materials", materialData)
+        .post("http://localhost:5000/materials", materialData)
         .then((res) => {
           if (res.data.insertedId) {
             toast.success("Material Uploaded Successfully", {

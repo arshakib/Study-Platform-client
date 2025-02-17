@@ -10,21 +10,18 @@ const AllMate = () => {
   } = useQuery({
     queryKey: ["material"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/materials`,
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("access-token")}`,
-          },
-        }
-      );
+      const { data } = await axios.get(`http://localhost:5000/materials`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      });
       return data;
     },
   });
   const handleDelete = async (id) => {
     try {
       await axios
-        .delete(`https://study-ten-blond.vercel.app/materials/${id}`)
+        .delete(`http://localhost:5000/materials/${id}`)
         .then(() => {
           refetch();
           console.log("Material deleted successfully");

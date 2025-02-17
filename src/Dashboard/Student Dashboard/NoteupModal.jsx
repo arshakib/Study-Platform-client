@@ -18,15 +18,11 @@ const NoteupModal = ({ refetch, notedata }) => {
     };
 
     axios
-      .patch(
-        `https://study-ten-blond.vercel.app/notes/${_id}`,
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("access-token")}`,
-          },
+      .patch(`http://localhost:5000/notes/${_id}`, updateData, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access-token")}`,
         },
-        updateData
-      )
+      })
       .then((res) => {
         console.log(res.data);
         if (res.data.modifiedCount) {

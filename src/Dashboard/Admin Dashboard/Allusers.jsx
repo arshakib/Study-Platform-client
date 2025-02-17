@@ -11,14 +11,11 @@ const Allusers = () => {
   const { data: userData = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/users`,
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("access-token")}`,
-          },
-        }
-      );
+      const { data } = await axios.get(`http://localhost:5000/users`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      });
       return data;
     },
   });
@@ -31,7 +28,7 @@ const Allusers = () => {
     const fetchSearchResults = async () => {
       try {
         const { data } = await axios.get(
-          `https://study-ten-blond.vercel.app/users?search=${search}`,
+          `http://localhost:5000/users?search=${search}`,
           {
             headers: {
               authorization: `Bearer ${localStorage.getItem("access-token")}`,
@@ -54,7 +51,7 @@ const Allusers = () => {
   const handleRoleChange = async (e, id) => {
     const role = e.target.value;
     try {
-      await axios.patch(`https://study-ten-blond.vercel.app/users/${id}`, {
+      await axios.patch(`http://localhost:5000/users/${id}`, {
         role,
       });
       refetch();

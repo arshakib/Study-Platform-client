@@ -14,7 +14,7 @@ const Show = () => {
     queryKey: ["length"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/onesessions/${id.id}`
+        `http://localhost:5000/onesessions/${id.id}`
       );
       return data;
     },
@@ -24,7 +24,7 @@ const Show = () => {
     queryKey: ["user", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/users/${user?.email}`
+        `http://localhost:5000/users/${user?.email}`
       );
       return data;
     },
@@ -34,7 +34,7 @@ const Show = () => {
     queryKey: ["reviews", id.id],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/reviews/${id.id}`
+        `http://localhost:5000/reviews/${id.id}`
       );
       return data;
     },
@@ -60,7 +60,7 @@ const Show = () => {
   const freeSession = async () => {
     try {
       const { data } = await axios.post(
-        "https://study-ten-blond.vercel.app/payment",
+        "http://localhost:5000/payment",
         paymentInfo
       );
       toast.success("Booking successful", {

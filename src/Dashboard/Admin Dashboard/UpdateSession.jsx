@@ -11,7 +11,7 @@ const UpdateSession = () => {
     queryKey: ["sessionpreview"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/onesessions/${id}`,
+        `http://localhost:5000/onesessions/${id}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,
@@ -77,7 +77,7 @@ const UpdateSession = () => {
 
     try {
       const response = await axios.patch(
-        `https://study-ten-blond.vercel.app/sessionsupdate/${id}`,
+        `http://localhost:5000/sessionsupdate/${id}`,
         session
       );
 

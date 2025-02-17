@@ -17,7 +17,7 @@ const ViewNote = () => {
     queryKey: ["notes", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/notes/${user?.email}`,
+        `http://localhost:5000/notes/${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,
@@ -35,7 +35,7 @@ const ViewNote = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`https://study-ten-blond.vercel.app/notes/${id}`, {
+      .delete(`http://localhost:5000/notes/${id}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("access-token")}`,
         },

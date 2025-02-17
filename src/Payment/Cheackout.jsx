@@ -15,7 +15,7 @@ const Cheackout = ({ id }) => {
     queryKey: ["amount"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/onesessions/${id}`,
+        `http://localhost:5000/onesessions/${id}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,
@@ -29,11 +29,13 @@ const Cheackout = ({ id }) => {
     queryKey: ["stop"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/stop/${id}`
+        `http://localhost:5000/stop/${user?.email}`
       );
       return data;
     },
   });
+
+  console.log(stop);
 
   const paymentInfo = {
     bookedsessionId: sessionData?._id,
@@ -41,29 +43,7 @@ const Cheackout = ({ id }) => {
     studentName: user?.displayName,
     tutorEmail: sessionData?.tutorEmail,
   };
-  //   if (id === stop?.bookedsessionId) {
-  //     toast.error("Already Booked", {
-  //       position: "top-right",
-  //       autoClose: 2000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //     });
-  //   } else {
-  //     axios
-  //       .post("https://study-ten-blond.vercel.app/create-payment-intent", {
-  //         price: sessionData?.registrationFee || 0,
-  //       })
-  //       .then((res) => {
-  //         setClientSecret(res.data.clientSecret);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error creating payment intent:", error);
-  //       });
-  //   }
-  // }, [id, stop?.bookedsessionId, sessionData?.registrationFee]);
+  console.log(paymentInfo);
 
   useEffect(() => {
     if (!sessionData?.registrationFee) {
@@ -83,7 +63,7 @@ const Cheackout = ({ id }) => {
       });
     } else {
       axios
-        .post("https://study-ten-blond.vercel.app/create-payment-intent", {
+        .post("http://localhost:5000/create-payment-intent", {
           price: sessionData?.registrationFee,
         })
         .then((res) => {
@@ -127,7 +107,6 @@ const Cheackout = ({ id }) => {
           billing_details: {
             name: user?.displayName,
             email: user?.email,
-            // purchaseid: sessionData?._id,
           },
         },
       });
@@ -137,7 +116,7 @@ const Cheackout = ({ id }) => {
       console.log("[paymentIntent]", paymentIntent);
       try {
         const { data } = await axios
-          .post("https://study-ten-blond.vercel.app/payment", paymentInfo)
+          .post("http://localhost:5000/payment", paymentInfo)
           .then((res) => {
             console.log(res.data);
             toast.success("Booking successful", {

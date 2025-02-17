@@ -12,7 +12,7 @@ const BookedCards = () => {
     queryKey: ["bookednumber"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/bookednumber/${user?.email}`
+        `http://localhost:5000/bookednumber/${user?.email}`
       );
       return data;
     },
@@ -35,7 +35,7 @@ const BookedCards = () => {
   useEffect(() => {
     axios
       .get(
-        `https://study-ten-blond.vercel.app/bookedsessions/${user?.email}?page=${currentPage}&size=${item}`,
+        `http://localhost:5000/bookedsessions/${user?.email}?page=${currentPage}&size=${item}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,

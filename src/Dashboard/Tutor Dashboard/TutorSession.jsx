@@ -17,7 +17,7 @@ const TutorSession = () => {
     queryKey: ["session", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/sessions/${user?.email}`,
+        `http://localhost:5000/sessions/${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,
@@ -30,14 +30,11 @@ const TutorSession = () => {
   const { data: getreject = [] } = useQuery({
     queryKey: ["getreject"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/rejectdata`,
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("access-token")}`,
-          },
-        }
-      );
+      const { data } = await axios.get(`http://localhost:5000/rejectdata`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      });
       return data;
     },
   });
@@ -46,7 +43,7 @@ const TutorSession = () => {
 
   const handleSubmit = (id) => {
     axios
-      .patch(`https://study-ten-blond.vercel.app/session/${id}`)
+      .patch(`http://localhost:5000/session/${id}`)
       .then(() => {
         refetch();
         toast.success("Session Approved", {

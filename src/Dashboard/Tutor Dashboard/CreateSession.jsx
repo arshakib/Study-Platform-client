@@ -75,21 +75,19 @@ const CreateSession = () => {
     };
 
     try {
-      axios
-        .post("https://study-ten-blond.vercel.app/sessions", session)
-        .then((res) => {
-          if (res.data.insertedId) {
-            toast.success("Session Created Successfully", {
-              position: "top-right",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-          }
-        });
+      axios.post("http://localhost:5000/sessions", session).then((res) => {
+        if (res.data.insertedId) {
+          toast.success("Session Created Successfully", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      });
     } catch (error) {
       console.log(error);
     }

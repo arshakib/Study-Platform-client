@@ -21,14 +21,11 @@ const StudySession = () => {
   } = useQuery({
     queryKey: ["session"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/adminsessions`,
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("access-token")}`,
-          },
-        }
-      );
+      const { data } = await axios.get(`http://localhost:5000/adminsessions`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      });
       return data;
     },
   });
@@ -41,15 +38,11 @@ const StudySession = () => {
     };
     try {
       axios
-        .patch(
-          `https://study-ten-blond.vercel.app/adminup/${id}`,
-          {
-            headers: {
-              authorization: `Bearer ${localStorage.getItem("access-token")}`,
-            },
+        .patch(`http://localhost:5000/adminup/${id}`, updateData, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access-token")}`,
           },
-          updateData
-        )
+        })
         .then((res) => {
           console.log(res.data);
           if (res.data.modifiedCount) {
@@ -76,7 +69,7 @@ const StudySession = () => {
   const handleDelete = async (id) => {
     try {
       await axios
-        .delete(`https://study-ten-blond.vercel.app/sessions/${id}`)
+        .delete(`http://localhost:5000/sessions/${id}`)
         .then(() => {
           refetch();
           console.log("session deleted successfully");

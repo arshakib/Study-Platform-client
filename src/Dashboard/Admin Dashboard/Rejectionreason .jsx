@@ -19,7 +19,7 @@ const Rejectionreason = ({ refetch, reject }) => {
 
     try {
       axios
-        .post(`https://study-ten-blond.vercel.app/rejectdata`, rejectData)
+        .post(`http://localhost:5000/rejectdata`, rejectData)
         .then((res) => {
           console.log(res.data);
           if (res.data.modifiedCount) {

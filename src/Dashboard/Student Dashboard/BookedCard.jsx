@@ -10,7 +10,7 @@ const BookedCard = ({ session }) => {
     queryKey: ["bookedData", bookedsessionId],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://study-ten-blond.vercel.app/bookedsessiondata/${bookedsessionId}`,
+        `http://localhost:5000/bookedsessiondata/${bookedsessionId}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,
