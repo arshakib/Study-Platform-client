@@ -70,9 +70,9 @@ const Allusers = () => {
   };
 
   return (
-    <div>
-      <div className="mb-10">
-        <label className="w-96 mx-auto input input-bordered flex items-center gap-2">
+    <div className="px-4 sm:px-6 lg:px-8 w-full">
+      <div className="mb-6 flex justify-center">
+        <label className="w-full sm:w-96 input input-bordered flex items-center gap-2">
           <input
             onKeyUp={(e) => setSearch(e.target.value)}
             type="text"
@@ -83,72 +83,58 @@ const Allusers = () => {
           <kbd className="kbd kbd-sm">K</kbd>
         </label>
       </div>
-      <div className="h-full w-full">
+      <div className="w-full overflow-x-auto">
         <ToastContainer />
-        <div className="overflow-x-auto">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th>User</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Actions</th>
+        <table className="table w-full">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {apiData.map((loguser) => (
+              <tr key={loguser?._id}>
+                <th>
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle h-12 w-12">
+                        <img src={loguser?.photoURL} alt="User Avatar" />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold">{loguser?.name}</div>
+                      {user?.email === loguser?.email && (
+                        <div className="text-sm opacity-50">(You)</div>
+                      )}
+                    </div>
+                  </div>
+                </th>
+                <td>
+                  <div className="font-bold">{loguser?.email}</div>
+                </td>
+                <td>{loguser?.role}</td>
+                <td>
+                  <select
+                    disabled={user?.email === loguser?.email}
+                    name="role"
+                    className="select select-bordered w-full"
+                    onChange={(event) => handleRoleChange(event, loguser?._id)}
+                  >
+                    <option disabled selected>
+                      Select Your Role
+                    </option>
+                    <option>student</option>
+                    <option>tutor</option>
+                    <option>admin</option>
+                  </select>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {apiData.map((loguser) => (
-                // eslint-disable-next-line react/jsx-key
-                <tr>
-                  <th>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
-                          <img
-                            src={loguser?.photoURL}
-                            alt="Avatar Tailwind CSS Component"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="font-bold">{loguser?.name}</div>
-                        {user?.email === loguser?.email && (
-                          <div className="text-sm opacity-50">(You)</div>
-                        )}
-                      </div>
-                    </div>
-                  </th>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div>
-                        <div className="font-bold">{loguser?.email}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>{loguser?.role}</td>
-                  <td>
-                    <select
-                      disabled={user?.email === loguser?.email}
-                      name="role"
-                      className="select select-bordered w-full max-w-xs"
-                      onChange={(event) =>
-                        handleRoleChange(event, loguser?._id)
-                      }
-                    >
-                      <option disabled selected>
-                        Select Your Role
-                      </option>
-                      <option>student</option>
-                      <option>tutor</option>
-                      <option>admin</option>
-                    </select>
-                  </td>
-                </tr>
-              ))}
-              {/* row 1 */}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

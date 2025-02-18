@@ -56,40 +56,39 @@ const AllMate = () => {
     return <p>Loading...</p>;
   }
   return (
-    <div>
-      <div>
-        <div>
-          <ToastContainer />
-          <div className="my-10 grid grid-cols-3 gap-7 w-11/12 mx-auto">
-            {material.map((item) => (
-              // eslint-disable-next-line react/jsx-key
-              <div className="card bg-base-100 w-80 shadow-xl">
-                <figure className="px-10 pt-10">
-                  <img
-                    src={item?.materialimage}
-                    alt="Shoes"
-                    className="rounded-xl"
-                  />
-                </figure>
-                <div className="card-body items-center text-center">
-                  <p>Session Id: {item?.sessionId}</p>
-                  <p className="text-sm">
-                    Material Img Link: {item?.materialimage}
-                  </p>
-                  <p className="text-sm"> Material Link: {item?.link}</p>
-                  <div className="card-actions">
-                    <button
-                      onClick={() => handleDelete(item?._id)}
-                      className="btn btn-primary"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
+    <div className="px-4 sm:px-6 lg:px-8">
+      <ToastContainer />
+      <div className="my-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 w-full max-w-7xl mx-auto">
+        {material.map((item) => (
+          <div key={item?._id} className="card bg-base-100 shadow-xl">
+            <figure className="px-5 pt-5">
+              <img
+                src={item?.materialimage}
+                alt="Material"
+                className="rounded-xl w-full h-40 object-cover"
+              />
+            </figure>
+            <div className="card-body items-center text-center">
+              <p className="text-sm font-semibold">
+                Session Id: {item?.sessionId}
+              </p>
+              <p className="text-sm truncate w-11/12">
+                Material Img: {item?.materialimage}
+              </p>
+              <p className="text-sm truncate w-11/12">
+                Material Link: {item?.link}
+              </p>
+              <div className="card-actions">
+                <button
+                  onClick={() => handleDelete(item?._id)}
+                  className="btn btn-primary"
+                >
+                  Delete
+                </button>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
