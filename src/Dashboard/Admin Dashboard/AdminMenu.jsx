@@ -31,6 +31,36 @@ export default function DefaultSidebar() {
                 ? "text-blue-900 font-semibold underline text-sm sm:text-base"
                 : "text-sm sm:text-base"
             }
+            to="/dashboard/analytics"
+          >
+            Analytics
+          </NavLink>
+        </ListItem>
+        <ListItem>
+          <ListItemPrefix>
+            <PresentationChartBarIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "text-blue-900 font-semibold underline text-sm sm:text-base"
+                : "text-sm sm:text-base"
+            }
+            to="/dashboard/profile"
+          >
+            Profile
+          </NavLink>
+        </ListItem>
+        <ListItem>
+          <ListItemPrefix>
+            <PresentationChartBarIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "text-blue-900 font-semibold underline text-sm sm:text-base"
+                : "text-sm sm:text-base"
+            }
             to="/dashboard/allusers"
           >
             View all users

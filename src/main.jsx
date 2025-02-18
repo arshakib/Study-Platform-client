@@ -30,6 +30,8 @@ import ViewSession from "./Dashboard/Tutor Dashboard/ViewSession";
 import TutorRoute from "./Routes/TutorRoute";
 import AdminRoute from "./Routes/AdminRoute";
 import StudentRoute from "./Routes/StudentRoute";
+import Profile from "./profile/Profile";
+import AnalyticsPage from "./Dashboard/AnalyticsPage";
 
 const queryClient = new QueryClient();
 
@@ -65,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: "viewbookeddata/:id",
         element: <ViewBooked />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },
@@ -201,6 +207,14 @@ const router = createBrowserRouter([
             <ViewSession />
           </Private>
         ),
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "analytics",
+        element: <AnalyticsPage />,
       },
     ],
   },
