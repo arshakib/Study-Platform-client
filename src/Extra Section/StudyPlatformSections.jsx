@@ -19,7 +19,7 @@ const StudyPlatformSections = () => {
   ];
 
   return (
-    <div className="font-sans bg-gray-50">
+    <div id="features" className="font-sans bg-gray-50">
       {/* 1. Hero Section */}
       <section className="py-20 px-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
         <div className="max-w-6xl mx-auto text-center animate-fadeIn">

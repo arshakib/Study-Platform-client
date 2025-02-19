@@ -44,7 +44,22 @@ const Nav = () => {
                     <li>
                       <NavLink to="/dashboard">Dashboard</NavLink>
                     </li>
-                    <li></li>
+                    <li>
+                      <NavLink to="#features">features</NavLink>
+                    </li>
+
+                    {user && (
+                      <>
+                        <li>
+                          <Link className="justify-between" to="/profile">
+                            Profile
+                          </Link>
+                        </li>
+                        <li>
+                          <a href="#tutors"> Tutors</a>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 </div>
                 <img src={logo} className="w-20 rounded-lg" alt="" />
@@ -57,7 +72,21 @@ const Nav = () => {
                   <li>
                     <NavLink to="/dashboard">Dashboard</NavLink>
                   </li>
-                  <li></li>
+                  <li>
+                    <a href="#features"> features</a>
+                  </li>
+                  {user && (
+                    <>
+                      <li>
+                        <Link className="justify-between" to="/profile">
+                          Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <a href="#tutors"> Tutors</a>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
               <div className="navbar-end mr-3">
