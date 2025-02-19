@@ -31,14 +31,14 @@ const Dashboard = () => {
           {userData?.role === "tutor" && <TutorMenu />}
           {userData?.role === "student" && <StudentMenu />}
         </div>
-        <div className="w-full m-7">
+        <div className="w-full min-h-screen p-4 md:p-6 lg:p-7 flex flex-col justify-center items-center">
           {location.pathname === "/dashboard" && (
-            <h1 className="text-5xl font-bold mb-6 flex justify-center items-center h-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-6 px-8 rounded-lg shadow-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-blue-500 to-purple-500 text-white py-4 sm:py-6 px-4 sm:px-8 rounded-lg shadow-lg text-center w-full max-w-4xl">
               Welcome To The Dashboard
             </h1>
           )}
           <updatesession.Provider value={{ updatedata, setUpdatedata }}>
-            {<Outlet />}
+            <Outlet />
           </updatesession.Provider>
         </div>
       </div>

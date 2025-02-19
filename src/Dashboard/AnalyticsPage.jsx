@@ -71,18 +71,14 @@ const taskDistributionData = [
 
 const AnalyticsPage = () => {
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {statsData.map((stat, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {statsData.map((stat) => (
             <div
               key={stat.title}
-              className={`${
-                stat.color
-              } p-6 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 animate-fade-in-up delay-${
-                index * 100
-              }`}
+              className={`p-6 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 ${stat.color}`}
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -105,9 +101,9 @@ const AnalyticsPage = () => {
         </div>
 
         {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Line Chart */}
-          <div className="bg-white p-6 rounded-2xl shadow-lg animate-slide-in-left">
+          <div className="bg-white p-6 rounded-2xl shadow-lg">
             <h3 className="text-xl font-semibold mb-4">Monthly Sales</h3>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -118,7 +114,6 @@ const AnalyticsPage = () => {
                     stroke="#6366f1"
                     strokeWidth={2}
                     dot={{ fill: "#6366f1" }}
-                    animationDuration={2000}
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -126,7 +121,7 @@ const AnalyticsPage = () => {
           </div>
 
           {/* Bar Chart */}
-          <div className="bg-white p-6 rounded-2xl shadow-lg animate-slide-in-right">
+          <div className="bg-white p-6 rounded-2xl shadow-lg">
             <h3 className="text-xl font-semibold mb-4">Weekly Performance</h3>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -135,7 +130,6 @@ const AnalyticsPage = () => {
                     dataKey="performance"
                     fill="#10b981"
                     radius={[4, 4, 0, 0]}
-                    animationDuration={2000}
                   />
                 </BarChart>
               </ResponsiveContainer>
@@ -143,7 +137,7 @@ const AnalyticsPage = () => {
           </div>
 
           {/* Pie Chart */}
-          <div className="bg-white p-6 rounded-2xl shadow-lg col-span-1 lg:col-span-2 animate-fade-in">
+          <div className="bg-white p-6 rounded-2xl shadow-lg col-span-1 md:col-span-2">
             <h3 className="text-xl font-semibold mb-4">Task Distribution</h3>
             <div className="h-80 flex items-center justify-center">
               <ResponsiveContainer width="100%" height="100%">
@@ -156,7 +150,6 @@ const AnalyticsPage = () => {
                     outerRadius={100}
                     paddingAngle={5}
                     dataKey="value"
-                    animationDuration={2000}
                   >
                     {taskDistributionData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
