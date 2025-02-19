@@ -76,24 +76,25 @@ const TutorSession = () => {
     <div className="h-full w-full p-4">
       <ToastContainer />
       <div className="overflow-x-auto">
-        <table className="table w-full">
+        <table className="table w-full min-w-max border border-gray-300">
           {/* Table Head */}
-          <thead className="bg-gray-100">
+          <thead className="bg-gray-100 text-xs sm:text-sm">
             <tr>
-              <th className="text-left px-4 py-2">Session Title</th>
-              <th className="text-left px-4 py-2">Registration Fee</th>
-              <th className="text-left px-4 py-2">Status</th>
-              <th className="text-left px-4 py-2">View</th>
-              <th className="text-left px-4 py-2">Action</th>
+              <th className="text-left px-2 sm:px-4 py-2">Session Title</th>
+              <th className="text-left px-2 sm:px-4 py-2">Registration Fee</th>
+              <th className="text-left px-2 sm:px-4 py-2">Status</th>
+              <th className="text-left px-2 sm:px-4 py-2">View</th>
+              <th className="text-left px-2 sm:px-4 py-2">Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-xs sm:text-sm">
             {session?.map((session) => (
               <tr key={session?._id} className="border-b">
-                <td className="px-4 py-3">
-                  <div className="flex items-center gap-3">
+                {/* Session Title & Avatar */}
+                <td className="px-2 sm:px-4 py-3">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12">
+                      <div className="mask mask-squircle h-10 w-10 sm:h-12 sm:w-12">
                         <img
                           src={session?.photoURL}
                           alt="Avatar"
@@ -103,7 +104,7 @@ const TutorSession = () => {
                     </div>
                     <div>
                       <div className="font-bold">{session?.title}</div>
-                      <div className="text-sm opacity-50">
+                      <div className="text-xs sm:text-sm opacity-50">
                         {
                           new Date(session?.registrationStartDate)
                             .toISOString()
@@ -113,34 +114,42 @@ const TutorSession = () => {
                     </div>
                   </div>
                 </td>
-                <td className="px-4 py-3">
-                  <div className="font-bold">$ {session?.registrationFee}</div>
+
+                {/* Registration Fee */}
+                <td className="px-2 sm:px-4 py-3 font-bold">
+                  $ {session?.registrationFee}
                 </td>
-                <td className="px-4 py-3">
+
+                {/* Status & Rejection Details */}
+                <td className="px-2 sm:px-4 py-3">
                   {session?.status}
                   {session?.status === "rejected" &&
                     getreject.map(
                       (reject) =>
                         reject?.rejectSessionid === session?._id && (
-                          <div className="bg-red-500 my-2 p-2 rounded-md text-white">
+                          <div className="bg-red-500 my-2 p-2 rounded-md text-white text-xs sm:text-sm">
                             <div>{reject?.reject}</div>
                             {reject?.feedback}
                           </div>
                         )
                     )}
                 </td>
-                <td className="px-4 py-3">
+
+                {/* View Button */}
+                <td className="px-2 sm:px-4 py-3">
                   <Link
                     to={`tutorsessionview/${session?._id}`}
-                    className="btn btn-primary btn-xs"
+                    className="btn btn-primary btn-xs sm:btn-sm"
                   >
                     Details
                   </Link>
                 </td>
-                <td className="px-4 py-3">
+
+                {/* Resubmit Button */}
+                <td className="px-2 sm:px-4 py-3">
                   <button
                     onClick={() => handleSubmit(session?._id)}
-                    className="btn btn-secondary btn-xs"
+                    className="btn btn-secondary btn-xs sm:btn-sm"
                   >
                     ReSubmit
                   </button>

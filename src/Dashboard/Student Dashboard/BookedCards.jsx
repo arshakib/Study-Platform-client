@@ -47,16 +47,20 @@ const BookedCards = () => {
 
   console.log(sessionData);
   return (
-    <div>
-      <div className="my-10 grid grid-cols-3 gap-4 w-11/12 mx-auto">
+    <div className="w-full">
+      {/* Grid Layout for Sessions */}
+      <div className="my-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-11/12 mx-auto">
         {sessionData.map((session) => (
           <BookedCard key={session._id} session={session} />
         ))}
       </div>
-      <div className="flex justify-center">
-        <div className="join">
+
+      {/* Pagination Section */}
+      <div className="flex justify-center mt-6">
+        <div className="join flex gap-2">
           {pages.map((page) => (
             <button
+              key={page}
               onClick={() => setCurrentPage(page)}
               className={`join-item btn ${
                 page === currentPage ? "btn-active" : ""

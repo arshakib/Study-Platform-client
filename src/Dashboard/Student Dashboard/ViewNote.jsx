@@ -63,50 +63,52 @@ const ViewNote = () => {
     return <p>Loading...</p>;
   }
   return (
-    <div>
+    <div className="min-h-screen w-full bg-gray-100 p-6">
       <ToastContainer />
-      <div className="min-h-screen bg-gray-100 p-6">
-        <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">
-            Manage Personal Notes
-          </h2>
-          {notes.length > 0 ? (
-            <div className="space-y-4">
-              {notes.map((note) => (
-                <div
-                  key={note.id}
-                  className="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <h3 className="text-xl font-semibold text-gray-800">
-                    {note.title}
-                  </h3>
-                  <p className="text-gray-600 mt-2">{note.description}</p>
-                  <div className="flex justify-end space-x-4 mt-4">
-                    <button
-                      onClick={() => {
-                        document.getElementById("my_modal_3").showModal();
-                        datafn(note);
-                      }}
-                      className="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                    >
-                      Update
-                    </button>
-                    <button
-                      onClick={() => handleDelete(note._id)}
-                      className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-                    >
-                      Delete
-                    </button>
-                  </div>
+      <div className="max-w-full mx-auto bg-white shadow-md rounded-lg p-8">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          Manage Personal Notes
+        </h2>
+
+        {/* Notes Section */}
+        {notes.length > 0 ? (
+          <div className="space-y-4">
+            {notes.map((note) => (
+              <div
+                key={note.id}
+                className="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
+              >
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {note.title}
+                </h3>
+                <p className="text-gray-600 mt-2">{note.description}</p>
+
+                {/* Buttons */}
+                <div className="flex flex-col sm:flex-row justify-end space-y-4 sm:space-y-0 sm:space-x-4 mt-4">
+                  <button
+                    onClick={() => {
+                      document.getElementById("my_modal_3").showModal();
+                      datafn(note);
+                    }}
+                    className="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 w-full sm:w-auto"
+                  >
+                    Update
+                  </button>
+                  <button
+                    onClick={() => handleDelete(note._id)}
+                    className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 w-full sm:w-auto"
+                  >
+                    Delete
+                  </button>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-gray-600">
-              No notes available. Start by creating some notes!
-            </p>
-          )}
-        </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-600 text-center">
+            No notes available. Start by creating some notes!
+          </p>
+        )}
       </div>
       <NoteupModal refetch={refetch} notedata={notedata} />
     </div>

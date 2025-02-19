@@ -34,77 +34,78 @@ const CreateNote = () => {
     }
   };
   return (
-    <div>
+    <div className="w-full min-h-screen flex items-center justify-center bg-gray-100 p-6">
       <ToastContainer />
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-        <div className="max-w-md w-full bg-white shadow-md rounded-lg p-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Create Note</h2>
-          <form onSubmit={handleSubmit}>
-            {/* Email Field */}
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="email"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                value={user?.email}
-                readOnly
-                className="w-full px-3 py-2 border rounded-md bg-gray-100 text-gray-500 cursor-not-allowed focus:outline-none"
-              />
-            </div>
+      <div className="bg-white shadow-md rounded-lg p-8 w-full sm:w-[90%] md:w-[80%] lg:w-[50%]">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          Create Note
+        </h2>
 
-            {/* Title Field */}
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="title"
-              >
-                Title
-              </label>
-              <input
-                type="text"
-                id="title"
-                name="title"
-                placeholder="Enter note title"
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Email Field */}
+          <div>
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={user?.email}
+              readOnly
+              className="w-full px-4 py-3 border rounded-md bg-gray-100 text-gray-500 cursor-not-allowed focus:outline-none"
+            />
+          </div>
 
-            {/* Description Field */}
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="description"
-              >
-                Description
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                placeholder="Enter note description"
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                rows="5"
-                required
-              ></textarea>
-            </div>
+          {/* Title Field */}
+          <div>
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="title"
+            >
+              Title
+            </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Enter note title"
+              className="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
 
-            {/* Submit Button */}
-            <div className="flex justify-end">
-              <button
-                type="submit"
-                className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                Create Note
-              </button>
-            </div>
-          </form>
-        </div>
+          {/* Description Field */}
+          <div>
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="description"
+            >
+              Description
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              placeholder="Enter note description"
+              className="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              rows="5"
+              required
+            ></textarea>
+          </div>
+
+          {/* Submit Button */}
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className="px-4 py-3 w-full sm:w-auto bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            >
+              Create Note
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

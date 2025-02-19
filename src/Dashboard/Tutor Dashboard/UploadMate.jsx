@@ -79,44 +79,69 @@ const UploadMate = () => {
     return <h1>Loading...</h1>;
   }
   return (
-    <div>
+    <div className="w-full">
       <ToastContainer />
-      <div className="my-10 grid lg:grid-cols-3 grid-cols-1 gap-4 w-11/12 mx-auto">
+
+      <div className="my-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-11/12 mx-auto">
         {session.map((session) => (
-          // eslint-disable-next-line react/jsx-key
-          <div className="card card-compact bg-base-100 w-80 shadow-xl">
+          <div
+            key={session._id}
+            className="card card-compact bg-base-100 shadow-xl w-full max-w-sm mx-auto"
+          >
             <form onSubmit={(event) => handleSubmit(event, session._id)}>
               <figure>
-                <img src={session?.photoURL || ""} alt="Shoes" />
+                <img
+                  src={session?.photoURL || ""}
+                  alt="Session"
+                  className="w-full h-40 object-cover rounded-t-lg"
+                />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{session?.title}</h2>
-                <p>Study session ID: {session?._id}</p>
-                <p>Tutor email: {session?.tutorEmail}</p>
-                <label className="form-control w-full max-w-xs">
+                <h2 className="card-title text-lg sm:text-xl">
+                  {session?.title}
+                </h2>
+                <p className="text-sm text-gray-600">
+                  Study session ID: {session?._id}
+                </p>
+                <p className="text-sm text-gray-600">
+                  Tutor email: {session?.tutorEmail}
+                </p>
+
+                {/* File Upload */}
+                <label className="form-control w-full">
                   <div className="label">
-                    <span className="label-text">Pick a file</span>
+                    <span className="label-text text-sm sm:text-base">
+                      Pick a file
+                    </span>
                   </div>
                   <input
                     type="file"
                     name="image"
                     required
-                    className="file-input file-input-bordered w-full max-w-xs"
+                    className="file-input file-input-bordered w-full"
                   />
                 </label>
-                <label className="form-control w-full max-w-xs">
+
+                {/* Upload Materials Link */}
+                <label className="form-control w-full">
                   <div className="label">
-                    <span className="label-text">Upload Materials Link</span>
+                    <span className="label-text text-sm sm:text-base">
+                      Upload Materials Link
+                    </span>
                   </div>
                   <input
                     type="text"
                     name="link"
                     placeholder="Type here"
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered w-full"
                   />
                 </label>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Upload</button>
+
+                {/* Upload Button */}
+                <div className="card-actions justify-end mt-4">
+                  <button className="btn btn-primary w-full sm:w-auto">
+                    Upload
+                  </button>
                 </div>
               </div>
             </form>

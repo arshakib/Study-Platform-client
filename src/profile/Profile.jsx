@@ -19,37 +19,37 @@ const Profile = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full hover:shadow-xl transition-shadow duration-300">
+    <div className="min-h-screen min-w-full bg-gray-100 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg w-full hover:shadow-2xl transition-shadow duration-300">
         {/* Profile Photo */}
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-4 sm:mb-6">
           <img
-            className="w-32 h-32 rounded-full object-cover border-4 border-gray-200"
+            className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-gray-200"
             src={user.photoURL}
             alt="User profile"
           />
         </div>
 
         {/* User Information */}
-        <div className="space-y-4 text-center">
+        <div className="space-y-3 sm:space-y-4 text-center">
           {/* Name */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-800">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
               {user.displayName}
             </h2>
           </div>
 
           {/* Role */}
-          <div className="flex items-center justify-center space-x-2">
-            <FaUserCircle className="h-5 w-5 text-gray-500" />
+          <div className="flex items-center justify-center space-x-2 text-sm sm:text-base">
+            <FaUserCircle className="h-4 w-4 sm:h-5 sm:w-5 text-gray-500" />
             <span className="text-gray-600 font-medium">
               {role?.role || "student"}
             </span>
           </div>
 
           {/* Email */}
-          <div className="flex items-center justify-center space-x-2">
-            <MdMail className="h-5 w-5 text-gray-500" />
+          <div className="flex items-center justify-center space-x-2 text-sm sm:text-base">
+            <MdMail className="h-4 w-4 sm:h-5 sm:w-5 text-gray-500" />
             <a
               href={`mailto:${user.email}`}
               className="text-blue-600 hover:text-blue-800 transition-colors duration-200"

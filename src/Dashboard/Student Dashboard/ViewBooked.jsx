@@ -97,7 +97,8 @@ const ViewBooked = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          {/* Grid Layout for Dates */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div className="text-gray-700">
               <p>
                 <strong>Registration Start:</strong>{" "}

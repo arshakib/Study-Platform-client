@@ -1,3 +1,4 @@
+import StudyPlatformSections from "../Extra Section/StudyPlatformSections";
 import Cards from "./Cards";
 import Slider from "./Slider";
 import Tutor from "./Tutor";
@@ -8,6 +9,7 @@ const Home = () => {
       <Slider />
       <Cards />
       <Tutor />
+      <StudyPlatformSections />
     </div>
   );
 };

@@ -24,7 +24,7 @@ const BookedMeta = () => {
 
   return (
     <div>
-      <div className="my-10 grid grid-cols-3 gap-7 w-11/12 mx-auto">
+      <div className="my-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 w-11/12 mx-auto">
         {tutoremail.map((item, index) => (
           <MetaCard key={index} tutoremail={item} />
         ))}

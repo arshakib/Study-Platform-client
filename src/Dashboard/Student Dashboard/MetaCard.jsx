@@ -28,22 +28,20 @@ const MetaCard = ({ tutoremail }) => {
   const { materialimage, sessionId, link } = MetaItem[0] || {};
   return (
     <div>
-      {MetaItem[0] == undefined ? (
-        <div></div>
+      {MetaItem[0] === undefined ? (
+        <div className="text-center text-gray-500 p-6">
+          <p>No material available for this session.</p>
+        </div>
       ) : (
         <div>
-          <div>
-            <div>
-              <div className="card bg-base-100 w-80 shadow-xl">
-                <figure className="px-10 pt-10">
-                  <img src={materialimage} alt="Shoes" className="rounded-xl" />
-                </figure>
-                <div className="card-body items-center text-center">
-                  <p>Session Id: {sessionId}</p>
-                  <p className="text-sm">Material Img Link: {materialimage}</p>
-                  <p className="text-sm"> Material Link: {link}</p>
-                </div>
-              </div>
+          <div className="card bg-base-100 w-80 shadow-xl">
+            <figure className="px-10 pt-10">
+              <img src={materialimage} alt="Material" className="rounded-xl" />
+            </figure>
+            <div className="card-body items-center text-center">
+              <p>Session Id: {sessionId}</p>
+              <p className="text-sm">Material Img Link: {materialimage}</p>
+              <p className="text-sm">Material Link: {link}</p>
             </div>
           </div>
         </div>

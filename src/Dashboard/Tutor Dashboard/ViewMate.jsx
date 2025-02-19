@@ -64,29 +64,40 @@ const ViewMate = () => {
     return <p>Loading...</p>;
   }
   return (
-    <div>
-      <div>
-        <ToastContainer />
-        <div className="my-10 grid lg:grid-cols-3 grid-cols-1 gap-7 w-11/12 mx-auto">
+    <div className="w-full">
+      <ToastContainer />
+      {material.length > 0 ? (
+        <div className="my-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 w-11/12 mx-auto">
           {material.map((item) => (
-            // eslint-disable-next-line react/jsx-key
-            <div className="card bg-base-100 w-80 shadow-xl">
-              <figure className="px-10 pt-10">
+            <div
+              key={item.sessionId}
+              className="card bg-base-100 shadow-xl w-full max-w-sm mx-auto"
+            >
+              {/* Image Section */}
+              <figure className="px-6 pt-6">
                 <img
                   src={item?.materialimage}
-                  alt="Shoes"
-                  className="rounded-xl"
+                  alt="Material"
+                  className="rounded-xl w-full h-40 object-cover"
                 />
               </figure>
-              <div className="card-body items-center text-center">
-                <p>Session Id: {item?.sessionId}</p>
-                <p className="text-sm">
-                  Material Img Link: {item?.materialimage}
+
+              {/* Card Content */}
+              <div className="card-body text-center">
+                <p className="font-semibold">Session ID: {item?.sessionId}</p>
+                <p className="text-sm break-words">
+                  <span className="font-medium">Material Img Link:</span>{" "}
+                  {item?.materialimage}
                 </p>
-                <p className="text-sm"> Material Link: {item?.link}</p>
-                <div className="card-actions">
+                <p className="text-sm break-words">
+                  <span className="font-medium">Material Link:</span>{" "}
+                  {item?.link}
+                </p>
+
+                {/* Buttons */}
+                <div className="card-actions flex flex-wrap justify-center gap-2 mt-4">
                   <button
-                    className="btn"
+                    className="btn btn-secondary w-full sm:w-auto"
                     onClick={() =>
                       document.getElementById("my_modal_1").showModal()
                     }
@@ -96,17 +107,23 @@ const ViewMate = () => {
 
                   <button
                     onClick={() => handleDelete(item?._id)}
-                    className="btn btn-primary"
+                    className="btn btn-primary w-full sm:w-auto"
                   >
                     Delete
                   </button>
                 </div>
               </div>
+
+              {/* Delete Modal */}
               <DeleteModal item={item} refetch={refetch} />
             </div>
           ))}
         </div>
-      </div>
+      ) : (
+        <div className="text-center my-10 text-lg font-semibold text-gray-500">
+          No materials available.
+        </div>
+      )}
     </div>
   );
 };
