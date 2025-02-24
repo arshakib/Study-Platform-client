@@ -7,7 +7,9 @@ const Tutor = () => {
   const { data: tutors = [] } = useQuery({
     queryKey: ["material"],
     queryFn: async () => {
-      const { data } = await axios.get(`http://localhost:5000/tutors`);
+      const { data } = await axios.get(
+        `https://study-ten-blond.vercel.app/tutors`
+      );
       return data;
     },
   });

@@ -15,7 +15,7 @@ const ViewMate = () => {
     queryKey: ["material"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/materials/${user?.email}`,
+        `https://study-ten-blond.vercel.app/materials/${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,
@@ -29,7 +29,7 @@ const ViewMate = () => {
   const handleDelete = async (id) => {
     try {
       await axios
-        .delete(`http://localhost:5000/materials/${id}`)
+        .delete(`https://study-ten-blond.vercel.app/materials/${id}`)
         .then(() => {
           refetch();
           console.log("Material deleted successfully");

@@ -8,7 +8,9 @@ const Cards = () => {
   const { data: number = {} } = useQuery({
     queryKey: ["length"],
     queryFn: async () => {
-      const { data } = await axios.get("http://localhost:5000/sessionnumber");
+      const { data } = await axios.get(
+        "https://study-ten-blond.vercel.app/sessionnumber"
+      );
       return data;
     },
   });
@@ -28,7 +30,9 @@ const Cards = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/sessions?page=${currentPage}&size=${item}`)
+      .get(
+        `https://study-ten-blond.vercel.app/sessions?page=${currentPage}&size=${item}`
+      )
       .then((res) => setSessionData(res.data));
   }, [currentPage, item]);
 

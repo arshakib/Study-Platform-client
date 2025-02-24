@@ -71,7 +71,7 @@ const taskDistributionData = [
 
 const AnalyticsPage = () => {
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 md:p-8 z-40">
       <div className="max-w-7xl mx-auto">
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

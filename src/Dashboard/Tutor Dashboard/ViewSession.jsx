@@ -9,7 +9,7 @@ const ViewSession = () => {
     queryKey: ["length"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/onesessions/${id.id}`
+        `https://study-ten-blond.vercel.app/onesessions/${id.id}`
       );
       return data;
     },
@@ -19,7 +19,7 @@ const ViewSession = () => {
     queryKey: ["reviews", id.id],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/reviews/${id.id}`,
+        `https://study-ten-blond.vercel.app/reviews/${id.id}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,

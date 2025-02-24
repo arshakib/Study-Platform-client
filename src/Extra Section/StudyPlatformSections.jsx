@@ -67,9 +67,24 @@ const StudyPlatformSections = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Key Features</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { title: "Real-time Collaboration", icon: "💬" },
-              { title: "Progress Tracking", icon: "📈" },
-              { title: "Resource Sharing", icon: "📚" },
+              {
+                title: "Real-time Collaboration",
+                icon: "💬",
+                description:
+                  " the synchronized and seamless interaction and collaboration between employees on different projects, tasks",
+              },
+              {
+                title: "Progress Tracking",
+                icon: "📈",
+                description:
+                  "Project tracking is the process of monitoring and recording the progress of a project throughout its lifecycle.",
+              },
+              {
+                title: "Resource Sharing",
+                icon: "📚",
+                description:
+                  "Resource sharing is the act of sharing resources, such as information, equipment, or personnel, with others.",
+              },
             ].map((feature, index) => (
               <div
                 key={feature.title}
@@ -78,9 +93,7 @@ const StudyPlatformSections = () => {
               >
                 <div className="text-4xl mb-4">{feature.icon}</div>
                 <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-                <p className="text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
+                <p className="text-gray-600">{feature.description}</p>
               </div>
             ))}
           </div>

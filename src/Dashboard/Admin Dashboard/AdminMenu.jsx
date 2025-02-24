@@ -23,7 +23,7 @@ export default function AdminSidebar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <>
+    <div className="z-0">
       {/* Hamburger Button: visible on mobile/tablet */}
       <div className="p-4 lg:hidden">
         <IconButton onClick={toggleMenu} variant="text">
@@ -155,6 +155,6 @@ export default function AdminSidebar() {
           </List>
         </Card>
       </div>
-    </>
+    </div>
   );
 }

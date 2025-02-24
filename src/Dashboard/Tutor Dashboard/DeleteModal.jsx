@@ -26,11 +26,15 @@ const DeleteModal = ({ item }) => {
     };
     try {
       axios
-        .patch(`http://localhost:5000/materials/${_id}`, updateData, {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("access-token")}`,
-          },
-        })
+        .patch(
+          `https://study-ten-blond.vercel.app/materials/${_id}`,
+          updateData,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res.data);
           if (res.data.modifiedCount) {

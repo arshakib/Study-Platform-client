@@ -18,7 +18,7 @@ const NoteupModal = ({ refetch, notedata }) => {
     };
 
     axios
-      .patch(`http://localhost:5000/notes/${_id}`, updateData, {
+      .patch(`https://study-ten-blond.vercel.app/notes/${_id}`, updateData, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("access-token")}`,
         },
@@ -46,7 +46,7 @@ const NoteupModal = ({ refetch, notedata }) => {
     <div className="w-full">
       <ToastContainer />
       <dialog id="my_modal_3" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box w-11/12 sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto">
+        <div className="modal-box w-full sm:w-11/12 md:w-3/4 lg:w-2/3 xl:w-1/2 2xl:w-1/3 mx-auto">
           <form onSubmit={handleUpdate}>
             {/* Title Field */}
             <div className="mb-4">
